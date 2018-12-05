@@ -18,18 +18,18 @@ gulp.task('loginBundle', () => {
         .pipe(babel({
             presets: ['env', 'react']
         }))
-        .pipe(gulp.dest('./hosted'));  
+        .pipe(gulp.dest('./hosted/'));  
 });
 
 gulp.task('appBundle', () => {
     gulp.src(['./client/app/maker.js',
-            './client/progresscircle.js',
+            './client/app/progresscircle.js',
             './client/helper/helper.js'])
         .pipe(concat('bundle.js'))
         .pipe(babel({
             presets: ['env', 'react']
         }))
-        .pipe(gulp.dest('./hosted'));  
+        .pipe(gulp.dest('./hosted/'));  
 });
 
 gulp.task('pinsBundle', () => {
@@ -39,8 +39,8 @@ gulp.task('pinsBundle', () => {
         .pipe(babel({
             presets: ['env', 'react']
         }))
-        .pipe(gulp.dest('./hosted'));  
-});
+        .pipe(gulp.dest('./hosted/'));  
+}); 
 
 gulp.task('settingsBundle', () => {
     gulp.src(['./client/settings/settings.js',
@@ -49,7 +49,7 @@ gulp.task('settingsBundle', () => {
         .pipe(babel({
             presets: ['env', 'react']
         }))
-        .pipe(gulp.dest('./hosted'));  
+        .pipe(gulp.dest('./hosted/'));  
 });
 
 gulp.task('lint', () => {
@@ -61,10 +61,10 @@ gulp.task('lint', () => {
 
 gulp.task('watch', () => {
     gulp.watch('./scss/style.scss',['sass']);
+    gulp.watch(['./client/settings/', './client/helper/'],['settingsBundle']);
     gulp.watch(['./client/app/maker.js', './client/app/progresscircle.js', './client/helper/helper.js'],['appBundle']);
     gulp.watch(['./client/login/client.js', './client/helper/helper.js'],['loginBundle']);
     gulp.watch(['./client/pins/pins.js', './client/helper/helper.js'],['pinsBundle']);
-    gulp.watch(['./client/settings/settings.js', './client/helper/helper.js'],['settingsBundle']);
     
     nodemon({
         script: './server/app.js',

@@ -8,6 +8,7 @@
   "description": "A web application",
   "main": "./server/app.js",
   "scripts": {
+    "buildSettings": "babel ./client/settings/ ./client/helper --presets react --out-file ./hosted/settingsBundle.js",
     "build": "gulp build",
     "watch": "gulp watch",
     "start": "node ./server/app.js",
@@ -51,7 +52,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
-    "babel-cli": "^6.18.0",
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.1.8",
     "babel-preset-react": "^6.24.1",
     "eslint": "^3.0.0",

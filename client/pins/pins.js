@@ -77,7 +77,7 @@ const loadTripsFromServer = (csrf) => {
                         infoWindow.setContent(`<h1>${data.trips[i].title}</h1><p>${data.trips[i].details}</p>`);
                     });
                 } else {
-                    console.dir("Something got wrong " + status);
+                    //console.dir("Something got wrong " + status);
                 }
             });
         }

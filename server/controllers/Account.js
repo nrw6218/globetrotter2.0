@@ -42,6 +42,7 @@ const login = (request, response) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong email or password' });
     }
+
     req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({ redirect: '/maker' });
@@ -129,16 +130,25 @@ const accountChange = (request, response) => {
     updatedEmail: email,
     first,
     last,
+    _id: req.session.account._id,
   };
-
-  console.dir(accountData);
 
   return Account.AccountModel.updateAccountInfo(accountData, (err, account) => {
     if (err || !account) {
-      console.dir(account);
       console.dir(err);
       return res.status(401).json({ error: 'There was an error updating your name' });
     }
+
+    //console.dir(account);
+
+    req.session.account = Account.AccountModel.toAPI({
+      email: account.email,
+      first: account.first,
+      last: account.last,
+      _id: account._id,
+    });
+
+    //console.dir(req.session.account);
 
     return res.json({ redirect: '/account' });
   });
@@ -191,8 +201,6 @@ const passwordChange = (request, response) => {
 const getToken = (request, response) => {
   const req = request;
   const res = response;
-
-  console.dir(req.session);
 
   const csrfJSON = {
     csrfToken: req.csrfToken(),

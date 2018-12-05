@@ -84,11 +84,19 @@ AccountSchema.statics.updateAccountInfo = (accountInfo, callback) => {
     email: accountInfo.originalEmail,
   };
 
-  return AccountModel.findOneAndUpdate(
-    search,
-    { first: accountInfo.first, last: accountInfo.last, email: accountInfo.email },
-    callback
-  );
+  if (accountInfo.originalEmail === accountInfo.updatedEmail) {
+    return AccountModel.findOneAndUpdate(
+      search,
+      { first: accountInfo.first, last: accountInfo.last },
+      callback
+    );
+  } else {
+    return AccountModel.findOneAndUpdate(
+      search,
+      { first: accountInfo.first, last: accountInfo.last, email: accountInfo.updatedEmail },
+      callback
+    );
+  }
 };
 
 AccountSchema.statics.generateHash = (password, callback) => {

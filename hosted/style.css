@@ -124,15 +124,40 @@ nav .logo {
     font-size: 1.5em;
 }
 
+nav .icons {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.icons a {
+    width: 1.5em;
+    height: 1.5em;
+    float: right;
+    margin-left: 10px;
+    transition: 0.2s all;
+}
+
+.icons a:hover {
+    opacity: 0.5;
+}
+
+.icons img {
+    width: 1.5em;
+    height: 1.5em;
+}
+
 nav:nth-child(1) {
     padding-left: 25px;
 }
 
 .navlink {
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 20px;
+    margin-right: 20px;
     color: black;
     font-size: 1em;
     display: inline-block;

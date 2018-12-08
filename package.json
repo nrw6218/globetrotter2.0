@@ -8,6 +8,9 @@
   "description": "A web application",
   "main": "./server/app.js",
   "scripts": {
+    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
+    "watchSettingsBundle": "babel --watch ./client/settings ./client/helper --presets react --out-file ./hosted/settingsBundle.js",
+    "watchPinsBundle": "babel --watch ./client/pins ./client/helper --presets react --out-file ./hosted/pinsBundle.js",
     "buildSettings": "babel ./client/settings/ ./client/helper --presets react --out-file ./hosted/settingsBundle.js",
     "build": "gulp build",
     "watch": "gulp watch",

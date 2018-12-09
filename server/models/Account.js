@@ -96,13 +96,17 @@ AccountSchema.statics.updateAccountInfo = (accountInfo, callback) => {
       { first: accountInfo.first, last: accountInfo.last, imageLink: accountInfo.imageLink },
       callback
     );
-  } else {
-    return AccountModel.findOneAndUpdate(
+  }
+  return AccountModel.findOneAndUpdate(
       search,
-      { first: accountInfo.first, last: accountInfo.last, imageLink: accountInfo.imageLink, email: accountInfo.updatedEmail },
+    {
+      first: accountInfo.first,
+      last: accountInfo.last,
+      imageLink: accountInfo.imageLink,
+      email: accountInfo.updatedEmail,
+    },
       callback
     );
-  }
 };
 
 AccountSchema.statics.generateHash = (password, callback) => {

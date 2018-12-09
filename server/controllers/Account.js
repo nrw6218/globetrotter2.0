@@ -142,7 +142,7 @@ const accountChange = (request, response) => {
       return res.status(401).json({ error: 'There was an error updating your name' });
     }
 
-    //console.dir(account);
+    // console.dir(account);
 
     req.session.account = Account.AccountModel.toAPI({
       email: account.email,
@@ -152,7 +152,7 @@ const accountChange = (request, response) => {
       _id: account._id,
     });
 
-    //console.dir(req.session.account);
+    // console.dir(req.session.account);
 
     return res.json({ redirect: '/account' });
   });

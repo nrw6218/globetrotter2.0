@@ -22,7 +22,10 @@ const profilePage = (req, res) => {
       return res.status(400).json({ error: 'An error occured' });
     }
 
-    return res.render('profile', { csrfToken: req.csrfToken(), trips: docs, account: req.session.account });
+    return res.render('profile', {
+      csrfToken: req.csrfToken(),
+      trips: docs, account: req.session.account,
+    });
   });
 };
 

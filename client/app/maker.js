@@ -45,7 +45,8 @@ class TripList extends React.Component {
         if(this.props.trips.length === 0) {
             return (
                 <div className="tripList">
-                    <h3 className="emptytrip">No Trips yet</h3>
+                    <h3 className="emptytrip">Time to fill your map!</h3>
+                    <p className="firstTime">Click on the NEW POST button to get started.</p>
                 </div>
             );
         }
@@ -85,76 +86,27 @@ class TripList extends React.Component {
                     </div>
                 </div>
                 <Modal show={this.state.modalOpen} handleClose={this.handleClose}>
-                    <CircularProgressBar 
-                        sqSize={200} 
-                        strokeWidth={15} 
-                        start={this.state.focusTrip ? this.state.focusTrip.startDate : 0} 
-                        total={this.state.focusTrip ? this.state.focusTrip.totalDays : 0}
-                        title={this.state.focusTrip ? this.state.focusTrip.title : 0}
-                    />
-                    <h3 className="tripTitle">{this.state.focusTrip ? this.state.focusTrip.title : 'New Trip'}</h3>
-                    <h3 className="tripLocation">{this.state.focusTrip ? this.state.focusTrip.location : 'Orlando, Florida'}</h3>
-                    <p className="tripDetails">{this.state.focusTrip ? this.state.focusTrip.details : 'No trip selected'}</p>
+                    <div className="tripInfo">
+                        <div className="tripRing">
+                            <CircularProgressBar 
+                                sqSize={200} 
+                                strokeWidth={15} 
+                                start={this.state.focusTrip ? this.state.focusTrip.startDate : 0} 
+                                total={this.state.focusTrip ? this.state.focusTrip.totalDays : 0}
+                                title={this.state.focusTrip ? this.state.focusTrip.title : 0}
+                            />
+                        </div>
+                        <div className="content">
+                            <h2 className="tripTitle">{this.state.focusTrip ? this.state.focusTrip.title : 'New Trip'}</h2>
+                            <h3 className="tripLocation">{this.state.focusTrip ? this.state.focusTrip.location : 'Orlando, Florida'} - {this.state.focusTrip ? new Date(this.state.focusTrip.startDate).toLocaleDateString() : 'No start date available'}</h3>
+                            <p className="tripDetails">{this.state.focusTrip ? this.state.focusTrip.details : 'No trip selected'}</p>
+                        </div>
+                    </div>
                 </Modal>
             </div>
         );
     }
 }
-
-const Modal = ({ handleClose, show, children }) => {
-
-    return (
-      <div id="modal" className={show ? "modalOpen" : "modalClosed"}>
-        <section className="modalContent">
-            {children}
-            <img className="closeButton" onClick={handleClose} src="assets/img/close.svg"/>
-        </section>
-      </div>
-    );
-};
-
-/*
-    Handles the creation of a new trip
-*/
-const handleTrip = (e) => {
-    e.preventDefault();
-
-    $("#tripMessage").animate({width:'hide'},350);
-
-    if($("#tripTitle").val() == '' || $("#tripLocation").val() == '' || $("#tripDate").val() == '') {
-        handleError("All fields are required!");
-        return false;
-    }
-
-    sendAjax('POST', $("#tripForm").attr("action"), $("#tripForm").serialize(), function() {
-        loadTripsFromServer($('token').val());
-    });
-
-    return false;
-};
-
-/*
-    Handles the creation of the Trip Form which allows the user to add a new trip to their account
-*/
-const TripForm = (props) => {
-    return (
-        <form id="tripForm"
-            onSubmit={handleTrip}
-            name="tripForm"
-            action="/maker"
-            method="POST"
-            className="tripForm"
-        >
-            <input className="formInput" id="tripTitle" type="text" name="title" placeholder="Title"/>
-            <input className="formInput" id="tripLocation" type="text" name="location" placeholder="Location"/>
-            <input className="formInput" id="tripDetails" type="text" name="details" placeholder="Details"/>
-            <input className="formInput" id="tripDate" type="date" name="startDate"/>
-            <input className="formInput" id="token" type="hidden" name="_csrf" value={props.csrf}/>
-            <input className="formSubmit" type="submit" value="Make Trip"/>
-            <span id="errorMessage"></span>
-        </form>
-    );
-};
 
 /*
     Loads the trips for the specified user from the server

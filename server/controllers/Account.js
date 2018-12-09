@@ -116,20 +116,23 @@ const accountChange = (request, response) => {
   let first = `${req.body.first}`;
   let last = `${req.body.last}`;
   let email = `${req.body.email}`;
+  let imageLink = `${req.body.image}`;
 
-  if (first === '' && last === '' && email === '') {
+  if (first === '' && last === '' && email === '' && imageLink === '') {
     return res.status(400).json({ error: 'No change requested.' });
   }
 
   if (first === '') { first = req.session.account.first; }
   if (last === '') { last = req.session.account.last; }
   if (email === '') { email = req.session.account.email; }
+  if (imageLink === '') { imageLink = req.session.account.imageLink; }
 
   const accountData = {
     originalEmail: req.session.account.email,
     updatedEmail: email,
     first,
     last,
+    imageLink,
     _id: req.session.account._id,
   };
 
@@ -145,6 +148,7 @@ const accountChange = (request, response) => {
       email: account.email,
       first: account.first,
       last: account.last,
+      imageLink: account.imageLink,
       _id: account._id,
     });
 

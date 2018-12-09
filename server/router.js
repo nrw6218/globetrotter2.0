@@ -11,6 +11,7 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/maker', mid.requiresLogin, controllers.Trip.makerPage);
   app.post('/maker', mid.requiresLogin, controllers.Trip.make);
+  app.get('/profile', mid.requiresLogin, controllers.Trip.profilePage);
   app.get('/pins', mid.requiresLogin, controllers.Trip.pinsPage);
   app.get('/account', mid.requiresLogin, controllers.Account.settingsPage);
   app.put('/password', mid.requiresLogin, mid.requiresSecure, controllers.Account.passwordChange);

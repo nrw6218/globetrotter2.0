@@ -72,7 +72,12 @@ var TripList = function (_React$Component) {
                     React.createElement(
                         'h3',
                         { className: 'emptytrip' },
-                        'No Trips yet'
+                        'Time to fill your map!'
+                    ),
+                    React.createElement(
+                        'p',
+                        { className: 'firstTime' },
+                        'Click on the NEW POST button to get started.'
                     )
                 );
             }
@@ -151,27 +156,41 @@ var TripList = function (_React$Component) {
                 React.createElement(
                     Modal,
                     { show: this.state.modalOpen, handleClose: this.handleClose },
-                    React.createElement(CircularProgressBar, {
-                        sqSize: 200,
-                        strokeWidth: 15,
-                        start: this.state.focusTrip ? this.state.focusTrip.startDate : 0,
-                        total: this.state.focusTrip ? this.state.focusTrip.totalDays : 0,
-                        title: this.state.focusTrip ? this.state.focusTrip.title : 0
-                    }),
                     React.createElement(
-                        'h3',
-                        { className: 'tripTitle' },
-                        this.state.focusTrip ? this.state.focusTrip.title : 'New Trip'
-                    ),
-                    React.createElement(
-                        'h3',
-                        { className: 'tripLocation' },
-                        this.state.focusTrip ? this.state.focusTrip.location : 'Orlando, Florida'
-                    ),
-                    React.createElement(
-                        'p',
-                        { className: 'tripDetails' },
-                        this.state.focusTrip ? this.state.focusTrip.details : 'No trip selected'
+                        'div',
+                        { className: 'tripInfo' },
+                        React.createElement(
+                            'div',
+                            { className: 'tripRing' },
+                            React.createElement(CircularProgressBar, {
+                                sqSize: 200,
+                                strokeWidth: 15,
+                                start: this.state.focusTrip ? this.state.focusTrip.startDate : 0,
+                                total: this.state.focusTrip ? this.state.focusTrip.totalDays : 0,
+                                title: this.state.focusTrip ? this.state.focusTrip.title : 0
+                            })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'content' },
+                            React.createElement(
+                                'h2',
+                                { className: 'tripTitle' },
+                                this.state.focusTrip ? this.state.focusTrip.title : 'New Trip'
+                            ),
+                            React.createElement(
+                                'h3',
+                                { className: 'tripLocation' },
+                                this.state.focusTrip ? this.state.focusTrip.location : 'Orlando, Florida',
+                                ' - ',
+                                this.state.focusTrip ? new Date(this.state.focusTrip.startDate).toLocaleDateString() : 'No start date available'
+                            ),
+                            React.createElement(
+                                'p',
+                                { className: 'tripDetails' },
+                                this.state.focusTrip ? this.state.focusTrip.details : 'No trip selected'
+                            )
+                        )
                     )
                 )
             );
@@ -181,70 +200,11 @@ var TripList = function (_React$Component) {
     return TripList;
 }(React.Component);
 
-var Modal = function Modal(_ref) {
-    var handleClose = _ref.handleClose,
-        show = _ref.show,
-        children = _ref.children;
-
-
-    return React.createElement(
-        'div',
-        { id: 'modal', className: show ? "modalOpen" : "modalClosed" },
-        React.createElement(
-            'section',
-            { className: 'modalContent' },
-            children,
-            React.createElement('img', { className: 'closeButton', onClick: handleClose, src: 'assets/img/close.svg' })
-        )
-    );
-};
-
-/*
-    Handles the creation of a new trip
-*/
-var handleTrip = function handleTrip(e) {
-    e.preventDefault();
-
-    $("#tripMessage").animate({ width: 'hide' }, 350);
-
-    if ($("#tripTitle").val() == '' || $("#tripLocation").val() == '' || $("#tripDate").val() == '') {
-        handleError("All fields are required!");
-        return false;
-    }
-
-    sendAjax('POST', $("#tripForm").attr("action"), $("#tripForm").serialize(), function () {
-        loadTripsFromServer($('token').val());
-    });
-
-    return false;
-};
-
-/*
-    Handles the creation of the Trip Form which allows the user to add a new trip to their account
-*/
-var TripForm = function TripForm(props) {
-    return React.createElement(
-        'form',
-        { id: 'tripForm',
-            onSubmit: handleTrip,
-            name: 'tripForm',
-            action: '/maker',
-            method: 'POST',
-            className: 'tripForm'
-        },
-        React.createElement('input', { className: 'formInput', id: 'tripTitle', type: 'text', name: 'title', placeholder: 'Title' }),
-        React.createElement('input', { className: 'formInput', id: 'tripLocation', type: 'text', name: 'location', placeholder: 'Location' }),
-        React.createElement('input', { className: 'formInput', id: 'tripDetails', type: 'text', name: 'details', placeholder: 'Details' }),
-        React.createElement('input', { className: 'formInput', id: 'tripDate', type: 'date', name: 'startDate' }),
-        React.createElement('input', { className: 'formInput', id: 'token', type: 'hidden', name: '_csrf', value: props.csrf }),
-        React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Make Trip' }),
-        React.createElement('span', { id: 'errorMessage' })
-    );
-};
-
 /*
     Loads the trips for the specified user from the server
 */
+
+
 var loadTripsFromServer = function loadTripsFromServer(csrf) {
     sendAjax('GET', '/getTrips', null, function (data) {
         ReactDOM.render(React.createElement(TripList, { trips: data.trips, csrf: csrf }), document.querySelector("#trips"));
@@ -275,6 +235,24 @@ $(document).ready(function () {
     getToken();
 });
 "use strict";
+
+var Modal = function Modal(_ref) {
+    var handleClose = _ref.handleClose,
+        show = _ref.show,
+        children = _ref.children;
+
+
+    return React.createElement(
+        "div",
+        { className: show ? "modal modalOpen" : "modal modalClosed" },
+        React.createElement(
+            "section",
+            { className: "modalContent" },
+            children,
+            React.createElement("img", { className: "closeButton", onClick: handleClose, src: "assets/img/close.svg" })
+        )
+    );
+};
 "use strict";
 
 //Original code from https://codepen.io/bbrady/pen/ozrjKE
@@ -352,6 +330,114 @@ var CircularProgressBar = function CircularProgressBar(props) {
     )
   );
 };
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TripForm = function (_React$Component) {
+    _inherits(TripForm, _React$Component);
+
+    function TripForm(props) {
+        _classCallCheck(this, TripForm);
+
+        var _this = _possibleConstructorReturn(this, (TripForm.__proto__ || Object.getPrototypeOf(TripForm)).call(this, props));
+
+        _this.state = {
+            modalOpen: false
+        };
+
+        _this.handleOpen = _this.handleOpen.bind(_this);
+        _this.handleClose = _this.handleClose.bind(_this);
+        _this.handleTrip = _this.handleTrip.bind(_this);
+        return _this;
+    }
+
+    _createClass(TripForm, [{
+        key: "handleOpen",
+        value: function handleOpen(e) {
+            this.setState({
+                modalOpen: true
+            });
+        }
+    }, {
+        key: "handleClose",
+        value: function handleClose(e) {
+            this.setState({
+                modalOpen: false
+            });
+        }
+    }, {
+        key: "handleTrip",
+        value: function handleTrip(e) {
+            e.preventDefault();
+
+            this.setState({
+                modalOpen: false
+            });
+
+            $("#tripMessage").animate({ width: 'hide' }, 350);
+
+            if ($("#tripTitle").val() == '' || $("#tripLocation").val() == '' || $("#tripDate").val() == '') {
+                handleError("All fields are required!");
+                return false;
+            }
+
+            sendAjax('POST', $("#tripForm").attr("action"), $("#tripForm").serialize(), function () {
+                loadTripsFromServer($('token').val());
+            });
+
+            document.getElementById("tripTitle").value = "";
+            document.getElementById("tripLocation").value = "";
+            document.getElementById("tripDate").value = "";
+            document.getElementById("tripDetails").value = "";
+
+            return false;
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement("img", { className: "postButton", onClick: this.handleOpen, src: "assets/img/newpost.svg" }),
+                React.createElement(
+                    Modal,
+                    { show: this.state.modalOpen, handleClose: this.handleClose },
+                    React.createElement(
+                        "h1",
+                        null,
+                        "Start Your Next Adventure!"
+                    ),
+                    React.createElement(
+                        "form",
+                        { id: "tripForm",
+                            onSubmit: this.handleTrip,
+                            name: "tripForm",
+                            action: "/maker",
+                            method: "POST",
+                            className: "tripForm"
+                        },
+                        React.createElement("input", { className: "formInput", id: "tripTitle", type: "text", name: "title", placeholder: "Title" }),
+                        React.createElement("input", { className: "formInput", id: "tripLocation", type: "text", name: "location", placeholder: "Location" }),
+                        React.createElement("input", { className: "formInput", id: "tripDate", type: "date", name: "startDate" }),
+                        React.createElement("textarea", { className: "formInput", id: "tripDetails", type: "text", name: "details", placeholder: "Details" }),
+                        React.createElement("input", { className: "formInput", id: "token", type: "hidden", name: "_csrf", value: this.props.csrf }),
+                        React.createElement("input", { className: "formSubmit", type: "submit", value: "Start the Countdown" }),
+                        React.createElement("span", { id: "errorMessage" })
+                    )
+                )
+            );
+        }
+    }]);
+
+    return TripForm;
+}(React.Component);
 "use strict";
 
 var handleError = function handleError(message) {

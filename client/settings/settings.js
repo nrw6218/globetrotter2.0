@@ -30,7 +30,7 @@ class SettingsWindow extends React.Component {
     handleAccountUpdate(e) {
         e.preventDefault();
     
-        if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '') {
+        if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#image").val() == '') {
             handleError("You have not made any changes to your account.");
             return false;
         }
@@ -41,7 +41,7 @@ class SettingsWindow extends React.Component {
     }
     
     checkAccountValues(e) {
-        if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '') {
+        if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == ''  && $("#image").val() == '') {
             this.setState({ accountChange: true });
         } else {
             this.setState({ accountChange: false });
@@ -75,6 +75,7 @@ class SettingsWindow extends React.Component {
                         <input className="formInput" id="first" name="first" onChange={this.checkAccountValues} placeholder={this.state.user.first}/>
                         <input className="formInput" id="last" name="last" onChange={this.checkAccountValues} placeholder={this.state.user.last}/>
                         <input className="formInput" id="email" name="email" onChange={this.checkAccountValues} placeholder={this.state.user.email}/>
+                        <input className="formInput" id="image" name="image" onChange={this.checkAccountValues} placeholder={this.state.user.imageLink ? this.state.user.imageLink : 'Link a profile picture from the web!'}/>
                         <input type="hidden" name="_csrf" value={this.state.csrf}/>
                         <input 
                             className="formSubmit" 
@@ -94,7 +95,7 @@ class SettingsWindow extends React.Component {
                         method="PUT" 
                         className="settingsForm"
                     >
-                        <h2>htvf</h2>
+                        <h2>Change Password</h2>
                         <input className="formInput" id="pass" type="password" name="pass" placeholder="Current Password"/>
                         <input className="formInput" id="newpass" type="password" name="newpass" placeholder="New Password"/>
                         <input className="formInput" id="newpass2" type="password" name="newpass2" placeholder="Retype New Password"/>

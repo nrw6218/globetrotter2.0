@@ -19,6 +19,11 @@ const AccountSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  imageLink: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
@@ -45,6 +50,7 @@ AccountSchema.statics.toAPI = doc => ({
   email: doc.email,
   first: doc.first,
   last: doc.last,
+  imageLink: doc.imageLink,
   _id: doc._id,
 });
 
@@ -87,13 +93,13 @@ AccountSchema.statics.updateAccountInfo = (accountInfo, callback) => {
   if (accountInfo.originalEmail === accountInfo.updatedEmail) {
     return AccountModel.findOneAndUpdate(
       search,
-      { first: accountInfo.first, last: accountInfo.last },
+      { first: accountInfo.first, last: accountInfo.last, imageLink: accountInfo.imageLink },
       callback
     );
   } else {
     return AccountModel.findOneAndUpdate(
       search,
-      { first: accountInfo.first, last: accountInfo.last, email: accountInfo.updatedEmail },
+      { first: accountInfo.first, last: accountInfo.last, imageLink: accountInfo.imageLink, email: accountInfo.updatedEmail },
       callback
     );
   }

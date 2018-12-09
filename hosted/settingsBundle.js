@@ -47,7 +47,7 @@ var SettingsWindow = function (_React$Component) {
         value: function handleAccountUpdate(e) {
             e.preventDefault();
 
-            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '') {
+            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#image").val() == '') {
                 handleError("You have not made any changes to your account.");
                 return false;
             }
@@ -59,12 +59,12 @@ var SettingsWindow = function (_React$Component) {
     }, {
         key: "checkAccountValues",
         value: function checkAccountValues(e) {
-            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '') {
+            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#image").val() == '') {
                 this.setState({ accountChange: true });
             } else {
                 this.setState({ accountChange: false });
             }
-            console.dir(this.state.accountChange);
+            //console.dir(this.state.accountChange);
         }
     }, {
         key: "render",
@@ -113,6 +113,7 @@ var SettingsWindow = function (_React$Component) {
                         React.createElement("input", { className: "formInput", id: "first", name: "first", onChange: this.checkAccountValues, placeholder: this.state.user.first }),
                         React.createElement("input", { className: "formInput", id: "last", name: "last", onChange: this.checkAccountValues, placeholder: this.state.user.last }),
                         React.createElement("input", { className: "formInput", id: "email", name: "email", onChange: this.checkAccountValues, placeholder: this.state.user.email }),
+                        React.createElement("input", { className: "formInput", id: "image", name: "image", onChange: this.checkAccountValues, placeholder: this.state.user.imageLink ? this.state.user.imageLink : 'Link a profile picture from the web!' }),
                         React.createElement("input", { type: "hidden", name: "_csrf", value: this.state.csrf }),
                         React.createElement("input", {
                             className: "formSubmit",
@@ -139,7 +140,7 @@ var SettingsWindow = function (_React$Component) {
                         React.createElement(
                             "h2",
                             null,
-                            "Update Password"
+                            "Change Password"
                         ),
                         React.createElement("input", { className: "formInput", id: "pass", type: "password", name: "pass", placeholder: "Current Password" }),
                         React.createElement("input", { className: "formInput", id: "newpass", type: "password", name: "newpass", placeholder: "New Password" }),
@@ -162,7 +163,7 @@ var setup = function setup(csrf, user) {
 
 var getToken = function getToken() {
     sendAjax('GET', '/getToken', null, function (result) {
-        console.dir(result);
+        //console.dir(result);
         setup(result.csrfToken, result.user);
     });
 };

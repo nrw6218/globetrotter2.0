@@ -9,6 +9,7 @@ const initMap = () => {
         center: {lat: -34.397, lng: 150.644},
         zoom: 10
     });
+
     infoWindow = new google.maps.InfoWindow;
 
       // Try HTML5 geolocation.
@@ -62,7 +63,10 @@ const loadTripsFromServer = (csrf) => {
     };
 
     sendAjax('GET', '/getTrips', null, (data) => {
+        let countries = [];
         geocoder =  new google.maps.Geocoder();
+        var world_geometry;
+        console.dir(data.trips);
         for(let i = 0; i < data.trips.length; i++) {
             geocoder.geocode( { 'address': data.trips[i].location }, function(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
@@ -76,11 +80,43 @@ const loadTripsFromServer = (csrf) => {
                         infoWindow.open(map, marker);
                         infoWindow.setContent(`<h1>${data.trips[i].title}</h1><p>${data.trips[i].details}</p>`);
                     });
+
+                    //Add country to the list of "scratch" countries
+                    for(let j = 0; j < results[0].address_components.length; j++) {
+                        // console.dir(results[0].address_components);
+                        if(results[0].address_components[j].types.includes("country") && !countries.includes(results[0].address_components[j].short_name)) {
+                            countries.push(results[0].address_components[j].short_name);
+                            console.dir(countries);
+                            break;
+                        }
+                    }
                 } else {
                     //console.dir("Something got wrong " + status);
                 }
+
+                //Compose the countryString
+                let countryString = "ISO_2DIGIT IN (";
+                for (let k = 0; k < countries.length; k++) {
+                    countryString += "'" + countries[k] + "'";
+                    if (k < countries.length - 1) {
+                        countryString += ",";
+                    }
+                }
+                countryString += ")";
+                console.dir(countryString);
+                world_geometry = new google.maps.FusionTablesLayer({
+                    query: {
+                        select: 'geometry',
+                        from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk',
+                        where: countryString
+                    },
+                    map: map,
+                    suppressInfoWindows: true,
+                });
             });
         }
+
+        
     });
 };
 

@@ -15,6 +15,17 @@ const makerPage = (req, res) => {
   });
 };
 
+const profilePage = (req, res) => {
+  Trip.TripModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occured' });
+    }
+
+    return res.render('profile', { csrfToken: req.csrfToken(), trips: docs, account: req.session.account });
+  });
+};
+
 /*
   Displays a 404 page
 */
@@ -113,6 +124,7 @@ const getTrips = (request, response) => {
 };
 
 module.exports.makerPage = makerPage;
+module.exports.profilePage = profilePage;
 module.exports.pinsPage = pinsPage;
 module.exports.getTrips = getTrips;
 module.exports.deleteTrip = deleteTrip;

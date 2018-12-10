@@ -166,20 +166,15 @@ const passwordChange = (request, response) => {
   const req = request;
   const res = response;
 
-  const password = `${req.body.pass}`;
   const newPassword = `${req.body.newpass}`;
   const newPasswordCopy = `${req.body.newpass2}`;
 
-  if (!password || !newPassword || !newPasswordCopy) {
+  if (!newPassword || !newPasswordCopy) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
   if (newPassword !== newPasswordCopy) {
     return res.status(400).json({ error: 'Passwords do not match' });
-  }
-
-  if (password === newPassword) {
-    return res.status(400).json({ error: 'New password cannot match the old password' });
   }
 
   return Account.AccountModel.generateHash(req.body.newpass, (salt, hash) => {

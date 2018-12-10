@@ -16,8 +16,10 @@ class SettingsWindow extends React.Component {
 
     handlePasswordUpdate(e) {
         e.preventDefault();
+
+        console.dir("wut");
     
-        if($("#pass").val() == '' || $("#newpass").val() == '' || $("#newpass2").val() == '') {
+        if($("#newpass").val() == '' || $("#newpass2").val() == '') {
             handleError("You must fill out all required fields!");
             return false;
         }
@@ -96,7 +98,6 @@ class SettingsWindow extends React.Component {
                         className="settingsForm"
                     >
                         <h2>Change Password</h2>
-                        <input className="formInput" id="pass" type="password" name="pass" placeholder="Current Password"/>
                         <input className="formInput" id="newpass" type="password" name="newpass" placeholder="New Password"/>
                         <input className="formInput" id="newpass2" type="password" name="newpass2" placeholder="Retype New Password"/>
                         <input type="hidden" name="_csrf" value={this.state.csrf}/>

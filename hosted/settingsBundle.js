@@ -33,7 +33,9 @@ var SettingsWindow = function (_React$Component) {
         value: function handlePasswordUpdate(e) {
             e.preventDefault();
 
-            if ($("#pass").val() == '' || $("#newpass").val() == '' || $("#newpass2").val() == '') {
+            console.dir("wut");
+
+            if ($("#newpass").val() == '' || $("#newpass2").val() == '') {
                 handleError("You must fill out all required fields!");
                 return false;
             }
@@ -142,7 +144,6 @@ var SettingsWindow = function (_React$Component) {
                             null,
                             "Change Password"
                         ),
-                        React.createElement("input", { className: "formInput", id: "pass", type: "password", name: "pass", placeholder: "Current Password" }),
                         React.createElement("input", { className: "formInput", id: "newpass", type: "password", name: "newpass", placeholder: "New Password" }),
                         React.createElement("input", { className: "formInput", id: "newpass2", type: "password", name: "newpass2", placeholder: "Retype New Password" }),
                         React.createElement("input", { type: "hidden", name: "_csrf", value: this.state.csrf }),
@@ -171,13 +172,12 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
-"use strict";
-
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
 var redirect = function redirect(response) {
+    console.dir('halp');
     window.location = response.redirect;
 };
 

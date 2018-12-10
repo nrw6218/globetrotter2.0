@@ -638,7 +638,7 @@ h3.tripTitle {
 h3.tripLocation {
     display: block;
     text-align: left;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 1em;
     text-align: center;
     color: #5a5a5a;
@@ -647,7 +647,7 @@ h3.tripLocation {
 p.tripDetails {
     display: block;
     text-align: left;
-    font-weight: bold;
+    font-weight: normal;
     padding-right: 40px;
     font-size: 1em;
     text-align: left;

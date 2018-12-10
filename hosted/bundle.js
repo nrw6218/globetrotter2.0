@@ -77,7 +77,7 @@ var TripList = function (_React$Component) {
                     React.createElement(
                         'p',
                         { className: 'firstTime' },
-                        'Click on the NEW POST button to get started.'
+                        'Click on the NEW POST glkjrnelgvmsegkljes to get started.'
                     )
                 );
             }
@@ -234,8 +234,81 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
-"use strict";
+//Original code from https://codepen.io/bbrady/pen/ozrjKE
+//Code extended and updated by Nikolas Whiteside
+var CircularProgressBar = function CircularProgressBar(props) {
 
+    //Number of seconds in a day
+    var oneDay = 24 * 60 * 60 * 1000;
+
+    // Size of the enclosing square
+    var sqSize = props.sqSize;
+    // SVG centers the stroke width on the radius, subtract out so circle fits in square
+    var radius = (props.sqSize - props.strokeWidth) / 2;
+    // Enclose cicle in a circumscribing square
+    var viewBox = '0 0 ' + sqSize + ' ' + sqSize;
+    // Arc length at 100% coverage is the circle circumference
+    var dashArray = radius * Math.PI * 2;
+
+    //Dates
+    var start_date = new Date(props.start);
+    var current_date = new Date();
+    var daysLeft = void 0;
+    var dashOffset = void 0;
+    var measure = void 0;
+    if (start_date.getTime() - current_date.getTime() > 0) {
+        daysLeft = Math.round(Math.abs(start_date.getTime() - current_date.getTime()) / oneDay);
+        dashOffset = dashArray - dashArray * (Math.abs(daysLeft - props.total) / props.total);
+    } else {
+        daysLeft = 0;
+        dashOffset = 0;
+    }
+
+    if (daysLeft > 1) {
+        measure = "days";
+    } else if (daysLeft == 1) {
+        measure = "day";
+    } else {
+        measure = "";
+    }
+
+    return React.createElement(
+        'svg',
+        {
+            width: props.sqSize,
+            height: props.sqSize,
+            viewBox: viewBox },
+        React.createElement('circle', {
+            className: 'circle-background',
+            cx: props.sqSize / 2,
+            cy: props.sqSize / 2,
+            r: radius,
+            strokeWidth: props.strokeWidth + 'px' }),
+        React.createElement('circle', {
+            className: 'circle-progress',
+            cx: props.sqSize / 2,
+            cy: props.sqSize / 2,
+            r: radius,
+            strokeWidth: props.strokeWidth + 'px'
+            // Start progress marker at 12 O'Clock
+            , transform: 'rotate(-90 ' + props.sqSize / 2 + ' ' + props.sqSize / 2 + ')',
+            style: {
+                stroke: daysLeft > 0 ? props.color : "rgba(150,206,180,1)",
+                strokeDasharray: dashArray,
+                strokeDashoffset: dashOffset
+            } }),
+        React.createElement(
+            'text',
+            {
+                className: 'circle-text',
+                x: '50%',
+                y: '50%',
+                dy: '.3em',
+                textAnchor: 'middle' },
+            (daysLeft > 0 ? daysLeft : 'CHARTED') + ' ' + measure
+        )
+    );
+};
 var Modal = function Modal(_ref) {
     var handleClose = _ref.handleClose,
         show = _ref.show,
@@ -243,137 +316,51 @@ var Modal = function Modal(_ref) {
 
 
     return React.createElement(
-        "div",
+        'div',
         { className: show ? "modal modalOpen" : "modal modalClosed" },
         React.createElement(
-            "section",
-            { className: "modalContent" },
+            'section',
+            { className: 'modalContent' },
             children,
-            React.createElement("img", { className: "closeButton", onClick: handleClose, src: "assets/img/close.svg" })
+            React.createElement('img', { className: 'closeButton', onClick: handleClose, src: 'assets/img/close.svg' })
         )
     );
 };
-"use strict";
 
-//Original code from https://codepen.io/bbrady/pen/ozrjKE
-//Code extended and updated by Nikolas Whiteside
-var CircularProgressBar = function CircularProgressBar(props) {
-
-  //Number of seconds in a day
-  var oneDay = 24 * 60 * 60 * 1000;
-
-  // Size of the enclosing square
-  var sqSize = props.sqSize;
-  // SVG centers the stroke width on the radius, subtract out so circle fits in square
-  var radius = (props.sqSize - props.strokeWidth) / 2;
-  // Enclose cicle in a circumscribing square
-  var viewBox = "0 0 " + sqSize + " " + sqSize;
-  // Arc length at 100% coverage is the circle circumference
-  var dashArray = radius * Math.PI * 2;
-
-  //Dates
-  var start_date = new Date(props.start);
-  var current_date = new Date();
-  var daysLeft = void 0;
-  var dashOffset = void 0;
-  var measure = void 0;
-  if (start_date.getTime() - current_date.getTime() > 0) {
-    daysLeft = Math.round(Math.abs(start_date.getTime() - current_date.getTime()) / oneDay);
-    dashOffset = dashArray - dashArray * (Math.abs(daysLeft - props.total) / props.total);
-  } else {
-    daysLeft = 0;
-    dashOffset = 0;
-  }
-
-  if (daysLeft > 1) {
-    measure = "days";
-  } else if (daysLeft == 1) {
-    measure = "day";
-  } else {
-    measure = "";
-  }
-
-  return React.createElement(
-    "svg",
-    {
-      width: props.sqSize,
-      height: props.sqSize,
-      viewBox: viewBox },
-    React.createElement("circle", {
-      className: "circle-background",
-      cx: props.sqSize / 2,
-      cy: props.sqSize / 2,
-      r: radius,
-      strokeWidth: props.strokeWidth + "px" }),
-    React.createElement("circle", {
-      className: "circle-progress",
-      cx: props.sqSize / 2,
-      cy: props.sqSize / 2,
-      r: radius,
-      strokeWidth: props.strokeWidth + "px"
-      // Start progress marker at 12 O'Clock
-      , transform: "rotate(-90 " + props.sqSize / 2 + " " + props.sqSize / 2 + ")",
-      style: {
-        stroke: daysLeft > 0 ? props.color : "rgba(150,206,180,1)",
-        strokeDasharray: dashArray,
-        strokeDashoffset: dashOffset
-      } }),
-    React.createElement(
-      "text",
-      {
-        className: "circle-text",
-        x: "50%",
-        y: "50%",
-        dy: ".3em",
-        textAnchor: "middle" },
-      (daysLeft > 0 ? daysLeft : 'CHARTED') + " " + measure
-    )
-  );
-};
-"use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TripForm = function (_React$Component) {
-    _inherits(TripForm, _React$Component);
+var TripForm = function (_React$Component2) {
+    _inherits(TripForm, _React$Component2);
 
     function TripForm(props) {
         _classCallCheck(this, TripForm);
 
-        var _this = _possibleConstructorReturn(this, (TripForm.__proto__ || Object.getPrototypeOf(TripForm)).call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (TripForm.__proto__ || Object.getPrototypeOf(TripForm)).call(this, props));
 
-        _this.state = {
+        _this3.state = {
             modalOpen: false
         };
 
-        _this.handleOpen = _this.handleOpen.bind(_this);
-        _this.handleClose = _this.handleClose.bind(_this);
-        _this.handleTrip = _this.handleTrip.bind(_this);
-        return _this;
+        _this3.handleOpen = _this3.handleOpen.bind(_this3);
+        _this3.handleClose = _this3.handleClose.bind(_this3);
+        _this3.handleTrip = _this3.handleTrip.bind(_this3);
+        return _this3;
     }
 
     _createClass(TripForm, [{
-        key: "handleOpen",
+        key: 'handleOpen',
         value: function handleOpen(e) {
             this.setState({
                 modalOpen: true
             });
         }
     }, {
-        key: "handleClose",
+        key: 'handleClose',
         value: function handleClose(e) {
             this.setState({
                 modalOpen: false
             });
         }
     }, {
-        key: "handleTrip",
+        key: 'handleTrip',
         value: function handleTrip(e) {
             e.preventDefault();
 
@@ -400,36 +387,36 @@ var TripForm = function (_React$Component) {
             return false;
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
-                React.createElement("img", { className: "postButton", onClick: this.handleOpen, src: "assets/img/newpost.svg" }),
+                React.createElement('img', { className: 'postButton', onClick: this.handleOpen, src: 'assets/img/newpost.svg' }),
                 React.createElement(
                     Modal,
                     { show: this.state.modalOpen, handleClose: this.handleClose },
                     React.createElement(
-                        "h1",
+                        'h1',
                         null,
-                        "Start Your Next Adventure!"
+                        'Start Your Next Adventure!'
                     ),
                     React.createElement(
-                        "form",
-                        { id: "tripForm",
+                        'form',
+                        { id: 'tripForm',
                             onSubmit: this.handleTrip,
-                            name: "tripForm",
-                            action: "/maker",
-                            method: "POST",
-                            className: "tripForm"
+                            name: 'tripForm',
+                            action: '/maker',
+                            method: 'POST',
+                            className: 'tripForm'
                         },
-                        React.createElement("input", { className: "formInput", id: "tripTitle", type: "text", name: "title", placeholder: "Title" }),
-                        React.createElement("input", { className: "formInput", id: "tripLocation", type: "text", name: "location", placeholder: "Location" }),
-                        React.createElement("input", { className: "formInput", id: "tripDate", type: "date", name: "startDate" }),
-                        React.createElement("textarea", { className: "formInput", id: "tripDetails", type: "text", name: "details", placeholder: "Details" }),
-                        React.createElement("input", { className: "formInput", id: "token", type: "hidden", name: "_csrf", value: this.props.csrf }),
-                        React.createElement("input", { className: "formSubmit", type: "submit", value: "Start the Countdown" }),
-                        React.createElement("span", { id: "errorMessage" })
+                        React.createElement('input', { className: 'formInput', id: 'tripTitle', type: 'text', name: 'title', placeholder: 'Title' }),
+                        React.createElement('input', { className: 'formInput', id: 'tripLocation', type: 'text', name: 'location', placeholder: 'Location' }),
+                        React.createElement('input', { className: 'formInput', id: 'tripDate', type: 'date', name: 'startDate' }),
+                        React.createElement('textarea', { className: 'formInput', id: 'tripDetails', type: 'text', name: 'details', placeholder: 'Details' }),
+                        React.createElement('input', { className: 'formInput', id: 'token', type: 'hidden', name: '_csrf', value: this.props.csrf }),
+                        React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Start the Countdown' }),
+                        React.createElement('span', { id: 'errorMessage' })
                     )
                 )
             );
@@ -438,13 +425,13 @@ var TripForm = function (_React$Component) {
 
     return TripForm;
 }(React.Component);
-"use strict";
 
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
 var redirect = function redirect(response) {
+    console.dir('halp');
     window.location = response.redirect;
 };
 

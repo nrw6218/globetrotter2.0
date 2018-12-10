@@ -24,6 +24,8 @@ gulp.task('loginBundle', () => {
 gulp.task('appBundle', () => {
     gulp.src(['./client/app/maker.js',
             './client/app/progresscircle.js',
+            './client/app/modal.js',
+            './client/app/tripForm.js',
             './client/helper/helper.js'])
         .pipe(concat('bundle.js'))
         .pipe(babel({
@@ -52,6 +54,16 @@ gulp.task('settingsBundle', () => {
         .pipe(gulp.dest('./hosted/'));  
 });
 
+gulp.task('profileBundle', () => {
+    gulp.src(['./client/profile/profile.js',
+            './client/helper/helper.js'])
+        .pipe(concat('profileBundle.js'))
+        .pipe(babel({
+            presets: ['env', 'react']
+        }))
+        .pipe(gulp.dest('./hosted/'));  
+});
+
 gulp.task('lint', () => {
     return gulp.src('./server/*.js')
         .pipe(eslint())
@@ -61,9 +73,10 @@ gulp.task('lint', () => {
 
 gulp.task('watch', () => {
     gulp.watch('./scss/style.scss',['sass']);
-    gulp.watch(['./client/settings/', './client/helper/'],['settingsBundle']);
+    gulp.watch(['./client/settings/settings.js', './client/helper/'],['settingsBundle']);
     gulp.watch(['./client/app/maker.js', './client/app/progresscircle.js', './client/helper/helper.js'],['appBundle']);
     gulp.watch(['./client/login/client.js', './client/helper/helper.js'],['loginBundle']);
+    gulp.watch(['./client/profile/profile.js', './client/helper/helper.js'],['profileBundle']);
     gulp.watch(['./client/pins/pins.js', './client/helper/helper.js'],['pinsBundle']);
     
     nodemon({
@@ -79,5 +92,6 @@ gulp.task('build', () => {
     gulp.start('loginBundle');
     gulp.start('pinsBundle');
     gulp.start('settingsBundle');
+    gulp.start('profileBundle');
     gulp.start('lint');
 });

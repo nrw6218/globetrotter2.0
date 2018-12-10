@@ -3,7 +3,11 @@
 // variables for the Google object instances
 var map = void 0,
     geocoder = void 0,
-    infoWindow = void 0;
+    infoWindow = void 0,
+    worldGeometry = void 0,
+    countryString = void 0;
+
+var countries = [];
 
 /*
     Initializes the google map object
@@ -50,7 +54,7 @@ var handleLocationError = function handleLocationError(browserHasGeolocation, in
     Loads the trips from the server and
     creates a new pin on the map for each
 */
-var loadTripsFromServer = function loadTripsFromServer(csrf) {
+var loadTripsFromServer = function loadTripsFromServer(csrf, callback) {
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     var icons = {
         upcoming: {
@@ -65,10 +69,7 @@ var loadTripsFromServer = function loadTripsFromServer(csrf) {
     };
 
     sendAjax('GET', '/getTrips', null, function (data) {
-        var countries = [];
         geocoder = new google.maps.Geocoder();
-        var world_geometry;
-        console.dir(data.trips);
 
         var _loop = function _loop(i) {
             geocoder.geocode({ 'address': data.trips[i].location }, function (results, status) {
@@ -86,36 +87,17 @@ var loadTripsFromServer = function loadTripsFromServer(csrf) {
 
                     //Add country to the list of "scratch" countries
                     for (var j = 0; j < results[0].address_components.length; j++) {
-                        // console.dir(results[0].address_components);
                         if (results[0].address_components[j].types.includes("country") && !countries.includes(results[0].address_components[j].short_name)) {
                             countries.push(results[0].address_components[j].short_name);
-                            console.dir(countries);
                             break;
                         }
                     }
-                } else {}
-                //console.dir("Something got wrong " + status);
-
-
-                //Compose the countryString
-                var countryString = "ISO_2DIGIT IN (";
-                for (var k = 0; k < countries.length; k++) {
-                    countryString += "'" + countries[k] + "'";
-                    if (k < countries.length - 1) {
-                        countryString += ",";
-                    }
+                } else {
+                    //console.dir("Something got wrong " + status);
                 }
-                countryString += ")";
-                console.dir(countryString);
-                world_geometry = new google.maps.FusionTablesLayer({
-                    query: {
-                        select: 'geometry',
-                        from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk',
-                        where: countryString
-                    },
-                    map: map,
-                    suppressInfoWindows: true
-                });
+                if (countries.length > 1) {
+                    callback();
+                }
             });
         };
 
@@ -125,11 +107,45 @@ var loadTripsFromServer = function loadTripsFromServer(csrf) {
     });
 };
 
+var loadFusionTable = function loadFusionTable() {
+    // build the list of countries
+    countryString = "ISO_2DIGIT IN (";
+    for (var i = 0; i < countries.length; i++) {
+        countryString += "'" + countries[i] + "'";
+        if (i != countries.length - 1) {
+            countryString += ",";
+        } else {
+            countryString += ")";
+        }
+    }
+    // if the map has country data, reset it
+    if (worldGeometry) {
+        worldGeometry.setMap(null);
+    }
+
+    // add a new fusion layer
+    worldGeometry = new google.maps.FusionTablesLayer({
+        query: {
+            select: 'geometry',
+            from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk',
+            where: '' + countryString
+        },
+        styles: [{
+            polygonOptions: {
+                fillColor: '#d96459',
+                fillOpacity: 0.6
+            }
+        }],
+        map: map,
+        suppressInfoWindows: true
+    });
+};
+
 /*
     Initial page setup
 */
 var setup = function setup(csrf) {
-    loadTripsFromServer(csrf);
+    loadTripsFromServer(csrf, loadFusionTable);
 };
 
 /*
@@ -144,13 +160,12 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
-"use strict";
-
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
 var redirect = function redirect(response) {
+    console.dir('halp');
     window.location = response.redirect;
 };
 

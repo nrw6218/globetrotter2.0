@@ -199,13 +199,12 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
-"use strict";
-
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
 var redirect = function redirect(response) {
+    console.dir('halp');
     window.location = response.redirect;
 };
 

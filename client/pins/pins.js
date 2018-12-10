@@ -1,5 +1,7 @@
 // variables for the Google object instances
-let map, geocoder, infoWindow;
+let map, geocoder, infoWindow, worldGeometry, countryString;
+
+let countries = [];
 
 /*
     Initializes the google map object
@@ -48,7 +50,7 @@ const handleLocationError = (browserHasGeolocation, infoWindow, pos) => {
     Loads the trips from the server and
     creates a new pin on the map for each
 */
-const loadTripsFromServer = (csrf) => {
+const loadTripsFromServer = (csrf, callback) => {
     const iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     const icons = {
         upcoming: {
@@ -63,10 +65,7 @@ const loadTripsFromServer = (csrf) => {
     };
 
     sendAjax('GET', '/getTrips', null, (data) => {
-        let countries = [];
         geocoder =  new google.maps.Geocoder();
-        var world_geometry;
-        console.dir(data.trips);
         for(let i = 0; i < data.trips.length; i++) {
             geocoder.geocode( { 'address': data.trips[i].location }, function(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
@@ -83,40 +82,55 @@ const loadTripsFromServer = (csrf) => {
 
                     //Add country to the list of "scratch" countries
                     for(let j = 0; j < results[0].address_components.length; j++) {
-                        // console.dir(results[0].address_components);
                         if(results[0].address_components[j].types.includes("country") && !countries.includes(results[0].address_components[j].short_name)) {
                             countries.push(results[0].address_components[j].short_name);
-                            console.dir(countries);
                             break;
                         }
                     }
                 } else {
                     //console.dir("Something got wrong " + status);
                 }
-
-                //Compose the countryString
-                let countryString = "ISO_2DIGIT IN (";
-                for (let k = 0; k < countries.length; k++) {
-                    countryString += "'" + countries[k] + "'";
-                    if (k < countries.length - 1) {
-                        countryString += ",";
-                    }
+                if(countries.length > 1) {
+                    callback();
                 }
-                countryString += ")";
-                console.dir(countryString);
-                world_geometry = new google.maps.FusionTablesLayer({
-                    query: {
-                        select: 'geometry',
-                        from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk',
-                        where: countryString
-                    },
-                    map: map,
-                    suppressInfoWindows: true,
-                });
             });
         }
+    });
+};
 
-        
+const loadFusionTable = () => {
+    // build the list of countries
+    countryString = "ISO_2DIGIT IN (";
+    for(let i = 0; i < countries.length; i++) {
+        countryString += "'" + countries[i] + "'";
+        if(i != countries.length - 1) {
+            countryString += ",";
+        } else {
+            countryString += ")";
+        }
+    }
+    // if the map has country data, reset it
+    if(worldGeometry) {
+        worldGeometry.setMap(null);
+    }
+
+    // add a new fusion layer
+    worldGeometry = new google.maps.FusionTablesLayer({
+        query: {
+            select: 'geometry',
+            from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk',
+            where: `${countryString}`
+        },
+        styles: [
+            {
+                polygonOptions: {
+                    fillColor: '#d96459',
+                    fillOpacity: 0.6
+                }
+            }, 
+        ],
+        map: map,
+        suppressInfoWindows: true,
     });
 };
 
@@ -124,7 +138,7 @@ const loadTripsFromServer = (csrf) => {
     Initial page setup
 */
 const setup = function(csrf) {
-    loadTripsFromServer(csrf);
+    loadTripsFromServer(csrf, loadFusionTable);
 };
 
 /*

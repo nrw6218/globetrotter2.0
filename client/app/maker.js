@@ -45,7 +45,7 @@ class TripList extends React.Component {
             return (
                 <div className="tripList">
                     <h3 className="emptytrip">Time to fill your map!</h3>
-                    <p className="firstTime">Click on the NEW POST glkjrnelgvmsegkljes to get started.</p>
+                    <p className="firstTime">Click on the NEW POST button to get started.</p>
                 </div>
             );
         }

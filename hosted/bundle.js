@@ -76,7 +76,7 @@ var TripList = function (_React$Component) {
                     React.createElement(
                         'p',
                         { className: 'firstTime' },
-                        'Click on the NEW POST glkjrnelgvmsegkljes to get started.'
+                        'Click on the NEW POST button to get started.'
                     )
                 );
             }

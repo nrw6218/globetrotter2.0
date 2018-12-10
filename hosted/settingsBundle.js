@@ -33,8 +33,6 @@ var SettingsWindow = function (_React$Component) {
         value: function handlePasswordUpdate(e) {
             e.preventDefault();
 
-            console.dir("wut");
-
             if ($("#newpass").val() == '' || $("#newpass2").val() == '') {
                 handleError("You must fill out all required fields!");
                 return false;
@@ -66,7 +64,6 @@ var SettingsWindow = function (_React$Component) {
             } else {
                 this.setState({ accountChange: false });
             }
-            //console.dir(this.state.accountChange);
         }
     }, {
         key: "render",
@@ -164,7 +161,6 @@ var setup = function setup(csrf, user) {
 
 var getToken = function getToken() {
     sendAjax('GET', '/getToken', null, function (result) {
-        //console.dir(result);
         setup(result.csrfToken, result.user);
     });
 };
@@ -177,7 +173,6 @@ var handleError = function handleError(message) {
 };
 
 var redirect = function redirect(response) {
-    console.dir('halp');
     window.location = response.redirect;
 };
 

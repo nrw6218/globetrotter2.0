@@ -88,7 +88,7 @@ const loadTripsFromServer = (csrf, callback) => {
                         }
                     }
                 } else {
-                    //console.dir("Something got wrong " + status);
+                    console.dir("Something got wrong " + status);
                 }
                 if(countries.length > 1) {
                     callback();

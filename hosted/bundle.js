@@ -46,7 +46,6 @@ var TripList = function (_React$Component) {
     }, {
         key: 'handleClick',
         value: function handleClick(trip) {
-            console.dir(trip);
             // Enable the modal
             this.setState({
                 modalOpen: true,
@@ -431,7 +430,6 @@ var handleError = function handleError(message) {
 };
 
 var redirect = function redirect(response) {
-    console.dir('halp');
     window.location = response.redirect;
 };
 

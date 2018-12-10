@@ -27,7 +27,6 @@ class TripList extends React.Component {
     };
 
     handleClick(trip) {
-        console.dir(trip);
         // Enable the modal
         this.setState({
             modalOpen: true,

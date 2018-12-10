@@ -16,8 +16,6 @@ class SettingsWindow extends React.Component {
 
     handlePasswordUpdate(e) {
         e.preventDefault();
-
-        console.dir("wut");
     
         if($("#newpass").val() == '' || $("#newpass2").val() == '') {
             handleError("You must fill out all required fields!");
@@ -48,7 +46,6 @@ class SettingsWindow extends React.Component {
         } else {
             this.setState({ accountChange: false });
         }
-        //console.dir(this.state.accountChange);
     }
 
     render() {
@@ -119,7 +116,6 @@ const setup = function(csrf, user) {
 
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
-        //console.dir(result);
         setup(result.csrfToken, result.user);
     });
 };

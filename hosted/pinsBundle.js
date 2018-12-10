@@ -93,7 +93,7 @@ var loadTripsFromServer = function loadTripsFromServer(csrf, callback) {
                         }
                     }
                 } else {
-                    //console.dir("Something got wrong " + status);
+                    console.dir("Something got wrong " + status);
                 }
                 if (countries.length > 1) {
                     callback();
@@ -165,7 +165,6 @@ var handleError = function handleError(message) {
 };
 
 var redirect = function redirect(response) {
-    console.dir('halp');
     window.location = response.redirect;
 };
 

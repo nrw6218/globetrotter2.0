@@ -9,7 +9,6 @@ class ProfileView extends React.Component {
     }
 
     render() {
-        console.dir(this.props);
         //Calculate unique locations
         let uniqueLocations = [];
         let activityInfo;

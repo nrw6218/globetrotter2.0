@@ -3,7 +3,6 @@ const handleError = (message) => {
 };
 
 const redirect = (response) => {
-    console.dir('halp');
     window.location = response.redirect;
 };
 

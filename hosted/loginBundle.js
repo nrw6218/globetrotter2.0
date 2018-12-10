@@ -188,7 +188,6 @@ var handleError = function handleError(message) {
 };
 
 var redirect = function redirect(response) {
-    console.dir('halp');
     window.location = response.redirect;
 };
 

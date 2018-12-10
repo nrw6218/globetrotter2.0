@@ -25,7 +25,6 @@ var ProfileView = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            console.dir(this.props);
             //Calculate unique locations
             var uniqueLocations = [];
             var activityInfo = void 0;
@@ -204,7 +203,6 @@ var handleError = function handleError(message) {
 };
 
 var redirect = function redirect(response) {
-    console.dir('halp');
     window.location = response.redirect;
 };
 

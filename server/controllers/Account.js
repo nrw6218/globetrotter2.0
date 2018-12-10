@@ -113,23 +113,20 @@ const accountChange = (request, response) => {
 
   let first = `${req.body.first}`;
   let last = `${req.body.last}`;
-  let email = `${req.body.email}`;
   let bio = `${req.body.bio}`;
   let imageLink = `${req.body.image}`;
 
-  if (first === '' && last === '' && email === '' && bio === '' && imageLink === '') {
+  if (first === '' && last === '' && bio === '' && imageLink === '') {
     return res.status(400).json({ error: 'No change requested.' });
   }
 
   if (first === '') { first = req.session.account.first; }
   if (last === '') { last = req.session.account.last; }
-  if (email === '') { email = req.session.account.email; }
   if (bio === '') { bio = req.session.account.bio; }
   if (imageLink === '') { imageLink = req.session.account.imageLink; }
 
   const accountData = {
-    originalEmail: req.session.account.email,
-    updatedEmail: email,
+    email: req.session.account.email,
     first,
     last,
     imageLink,

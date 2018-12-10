@@ -98,6 +98,10 @@ const loadTripsFromServer = (csrf, callback) => {
     });
 };
 
+/*
+    Loads a fusion tables layer on the map based off of
+    a string of country names
+*/
 const loadFusionTable = () => {
     // build the list of countries
     countryString = "ISO_2DIGIT IN (";

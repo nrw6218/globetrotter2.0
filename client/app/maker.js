@@ -26,6 +26,9 @@ class TripList extends React.Component {
         return false;
     };
 
+    /*
+        Opens the modal and sets the trip accordingly
+    */
     handleClick(trip) {
         // Enable the modal
         this.setState({
@@ -34,6 +37,9 @@ class TripList extends React.Component {
         });
     }
 
+    /*
+        Closes the modal
+    */
     handleClose(e) {
         this.setState({
             modalOpen: false,

@@ -312,6 +312,8 @@ nav:nth-child(1) {
     height: 200px;
     resize: none;
     font-family: 'Roboto', sans-serif; }
+  .stackable .formSubmit {
+    width: 400px; }
 
 .settingsForm {
   display: flex;

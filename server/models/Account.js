@@ -93,33 +93,20 @@ AccountSchema.statics.updatePassword = (accountInfo, callback) => {
 
 AccountSchema.statics.updateAccountInfo = (accountInfo, callback) => {
   const search = {
-    email: accountInfo.originalEmail,
+    email: accountInfo.email,
   };
 
-  if (accountInfo.originalEmail === accountInfo.updatedEmail) {
-    return AccountModel.findOneAndUpdate(
-      search,
-      {
-        first: accountInfo.first,
-        last: accountInfo.last,
-        imageLink: accountInfo.imageLink,
-        bio: accountInfo.bio,
-      },
-      { returnNewDocument: true },
-      callback
-    );
-  }
   return AccountModel.findOneAndUpdate(
-      search,
+    search,
     {
       first: accountInfo.first,
       last: accountInfo.last,
       imageLink: accountInfo.imageLink,
-      email: accountInfo.updatedEmail,
+      bio: accountInfo.bio,
     },
-      { returnNewDocument: true },
-      callback
-    );
+    { returnNewDocument: true },
+    callback
+  );
 };
 
 AccountSchema.statics.generateHash = (password, callback) => {

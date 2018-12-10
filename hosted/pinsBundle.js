@@ -107,6 +107,10 @@ var loadTripsFromServer = function loadTripsFromServer(csrf, callback) {
     });
 };
 
+/*
+    Loads a fusion tables layer on the map based off of
+    a string of country names
+*/
 var loadFusionTable = function loadFusionTable() {
     // build the list of countries
     countryString = "ISO_2DIGIT IN (";
@@ -160,14 +164,23 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
+/*
+    Find the errorMessage object and populate it with a message
+*/
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
+/*
+    Redirect the user to the desired location
+*/
 var redirect = function redirect(response) {
     window.location = response.redirect;
 };
 
+/*
+    Sends an ajax request
+*/
 var sendAjax = function sendAjax(type, action, data, success) {
     $.ajax({
         cache: false,

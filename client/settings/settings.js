@@ -7,13 +7,19 @@ class SettingsWindow extends React.Component {
             user: props.user,
             csrf: props.csrf,
             accountChange: true,
+            passwordChange: true,
         };
 
         this.handlePasswordUpdate = this.handlePasswordUpdate.bind(this);
         this.handleAccountUpdate = this.handleAccountUpdate.bind(this);
         this.checkAccountValues = this.checkAccountValues.bind(this);
+        this.checkPasswordValues = this.checkPasswordValues.bind(this);
     }
 
+    /*
+        Takes the input from the password form and makes an ajax request to
+        update this user's password
+    */
     handlePasswordUpdate(e) {
         e.preventDefault();
     
@@ -27,10 +33,14 @@ class SettingsWindow extends React.Component {
         return false;
     }
     
+    /*
+        Takes the input from the account settings form and makes an ajax request to
+        update this user's password
+    */
     handleAccountUpdate(e) {
         e.preventDefault();
     
-        if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
+        if ($("#first").val() == '' && $("#last").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
             handleError("You have not made any changes to your account.");
             return false;
         }
@@ -40,11 +50,25 @@ class SettingsWindow extends React.Component {
         return false;
     }
     
+    /*
+        Checks if there is text within the account settings form and updates the state accordingly
+    */
     checkAccountValues(e) {
-        if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == ''  && $("#bio").val() == '' && $("#image").val() == '') {
+        if ($("#first").val() == '' && $("#last").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
             this.setState({ accountChange: true });
         } else {
             this.setState({ accountChange: false });
+        }
+    }
+
+    /*
+        Checks if there is text within the account settings form and updates the state accordingly
+    */
+    checkPasswordValues(e) {
+        if ($("#newpass").val() == '' || $("#newpass2").val() == '') {
+            this.setState({ passwordChange: true });
+        } else {
+            this.setState({ passwordChange: false });
         }
     }
 
@@ -73,7 +97,6 @@ class SettingsWindow extends React.Component {
                         <h2>Account</h2>
                         <input className="formInput" id="first" name="first" onChange={this.checkAccountValues} placeholder={this.state.user.first}/>
                         <input className="formInput" id="last" name="last" onChange={this.checkAccountValues} placeholder={this.state.user.last}/>
-                        <input className="formInput" id="email" name="email" onChange={this.checkAccountValues} placeholder={this.state.user.email}/>
                         <input className="formInput" id="image" name="image" onChange={this.checkAccountValues} placeholder={this.state.user.imageLink ? this.state.user.imageLink : 'Link a profile picture from the web!'}/>
                         <textarea className="formInput" id="bio" type="text" name="bio" onChange={this.checkAccountValues} placeholder={this.state.user.bio ? this.state.user.bio : "Write a bio..."}></textarea>
                         <input type="hidden" name="_csrf" value={this.state.csrf}/>
@@ -96,10 +119,15 @@ class SettingsWindow extends React.Component {
                         className="settingsForm"
                     >
                         <h2>Change Password</h2>
-                        <input className="formInput" id="newpass" type="password" name="newpass" placeholder="New Password"/>
-                        <input className="formInput" id="newpass2" type="password" name="newpass2" placeholder="Retype New Password"/>
+                        <input className="formInput" id="newpass" type="password" name="newpass" onChange={this.checkPasswordValues} placeholder="New Password"/>
+                        <input className="formInput" id="newpass2" type="password" name="newpass2" onChange={this.checkPasswordValues} placeholder="Retype New Password"/>
                         <input type="hidden" name="_csrf" value={this.state.csrf}/>
-                        <input className="formSubmit" type="submit" value="Change Password"/>
+                        <input 
+                            className="formSubmit" 
+                            type="submit" 
+                            value="Change Password"
+                            disabled={this.state.passwordChange}    
+                        />
                         <span id="errorMessage"></span>
                     </form>
                 </div>
@@ -111,7 +139,7 @@ class SettingsWindow extends React.Component {
 const setup = function(csrf, user) {
     ReactDOM.render(
         <SettingsWindow csrf={csrf} user={user} />,
-        document.querySelector("#settings")
+        document.querySelector("#content")
     );
 };
 

@@ -19,14 +19,22 @@ var SettingsWindow = function (_React$Component) {
         _this.state = {
             user: props.user,
             csrf: props.csrf,
-            accountChange: true
+            accountChange: true,
+            passwordChange: true
         };
 
         _this.handlePasswordUpdate = _this.handlePasswordUpdate.bind(_this);
         _this.handleAccountUpdate = _this.handleAccountUpdate.bind(_this);
         _this.checkAccountValues = _this.checkAccountValues.bind(_this);
+        _this.checkPasswordValues = _this.checkPasswordValues.bind(_this);
         return _this;
     }
+
+    /*
+        Takes the input from the password form and makes an ajax request to
+        update this user's password
+    */
+
 
     _createClass(SettingsWindow, [{
         key: "handlePasswordUpdate",
@@ -42,12 +50,18 @@ var SettingsWindow = function (_React$Component) {
 
             return false;
         }
+
+        /*
+            Takes the input from the account settings form and makes an ajax request to
+            update this user's password
+        */
+
     }, {
         key: "handleAccountUpdate",
         value: function handleAccountUpdate(e) {
             e.preventDefault();
 
-            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
+            if ($("#first").val() == '' && $("#last").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
                 handleError("You have not made any changes to your account.");
                 return false;
             }
@@ -56,13 +70,32 @@ var SettingsWindow = function (_React$Component) {
 
             return false;
         }
+
+        /*
+            Checks if there is text within the account settings form and updates the state accordingly
+        */
+
     }, {
         key: "checkAccountValues",
         value: function checkAccountValues(e) {
-            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
+            if ($("#first").val() == '' && $("#last").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
                 this.setState({ accountChange: true });
             } else {
                 this.setState({ accountChange: false });
+            }
+        }
+
+        /*
+            Checks if there is text within the account settings form and updates the state accordingly
+        */
+
+    }, {
+        key: "checkPasswordValues",
+        value: function checkPasswordValues(e) {
+            if ($("#newpass").val() == '' || $("#newpass2").val() == '') {
+                this.setState({ passwordChange: true });
+            } else {
+                this.setState({ passwordChange: false });
             }
         }
     }, {
@@ -111,7 +144,6 @@ var SettingsWindow = function (_React$Component) {
                         ),
                         React.createElement("input", { className: "formInput", id: "first", name: "first", onChange: this.checkAccountValues, placeholder: this.state.user.first }),
                         React.createElement("input", { className: "formInput", id: "last", name: "last", onChange: this.checkAccountValues, placeholder: this.state.user.last }),
-                        React.createElement("input", { className: "formInput", id: "email", name: "email", onChange: this.checkAccountValues, placeholder: this.state.user.email }),
                         React.createElement("input", { className: "formInput", id: "image", name: "image", onChange: this.checkAccountValues, placeholder: this.state.user.imageLink ? this.state.user.imageLink : 'Link a profile picture from the web!' }),
                         React.createElement("textarea", { className: "formInput", id: "bio", type: "text", name: "bio", onChange: this.checkAccountValues, placeholder: this.state.user.bio ? this.state.user.bio : "Write a bio..." }),
                         React.createElement("input", { type: "hidden", name: "_csrf", value: this.state.csrf }),
@@ -142,10 +174,15 @@ var SettingsWindow = function (_React$Component) {
                             null,
                             "Change Password"
                         ),
-                        React.createElement("input", { className: "formInput", id: "newpass", type: "password", name: "newpass", placeholder: "New Password" }),
-                        React.createElement("input", { className: "formInput", id: "newpass2", type: "password", name: "newpass2", placeholder: "Retype New Password" }),
+                        React.createElement("input", { className: "formInput", id: "newpass", type: "password", name: "newpass", onChange: this.checkPasswordValues, placeholder: "New Password" }),
+                        React.createElement("input", { className: "formInput", id: "newpass2", type: "password", name: "newpass2", onChange: this.checkPasswordValues, placeholder: "Retype New Password" }),
                         React.createElement("input", { type: "hidden", name: "_csrf", value: this.state.csrf }),
-                        React.createElement("input", { className: "formSubmit", type: "submit", value: "Change Password" }),
+                        React.createElement("input", {
+                            className: "formSubmit",
+                            type: "submit",
+                            value: "Change Password",
+                            disabled: this.state.passwordChange
+                        }),
                         React.createElement("span", { id: "errorMessage" })
                     )
                 )
@@ -157,7 +194,7 @@ var SettingsWindow = function (_React$Component) {
 }(React.Component);
 
 var setup = function setup(csrf, user) {
-    ReactDOM.render(React.createElement(SettingsWindow, { csrf: csrf, user: user }), document.querySelector("#settings"));
+    ReactDOM.render(React.createElement(SettingsWindow, { csrf: csrf, user: user }), document.querySelector("#content"));
 };
 
 var getToken = function getToken() {
@@ -169,14 +206,23 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
+/*
+    Find the errorMessage object and populate it with a message
+*/
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
+/*
+    Redirect the user to the desired location
+*/
 var redirect = function redirect(response) {
     window.location = response.redirect;
 };
 
+/*
+    Sends an ajax request
+*/
 var sendAjax = function sendAjax(type, action, data, success) {
     $.ajax({
         cache: false,

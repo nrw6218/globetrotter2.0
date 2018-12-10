@@ -12,18 +12,27 @@ class TripForm extends React.Component {
         this.handleTrip = this.handleTrip.bind(this);
     }
 
+    /*
+        Opens the modal using state
+    */
     handleOpen(e) {
         this.setState({
             modalOpen: true,
         });
     }
 
+    /*
+        Closes the modal
+    */
     handleClose(e) {
         this.setState({
             modalOpen: false,
         });
     }
 
+    /*
+        Handles the creation of a trip object
+    */
     handleTrip(e) {
         e.preventDefault();
 

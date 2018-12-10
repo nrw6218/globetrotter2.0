@@ -1,5 +1,8 @@
 const Modal = ({ handleClose, show, children }) => {
 
+  /*
+    Returns a modal object, containing the passed in children
+  */
   return (
     <div className={show ? "modal modalOpen" : "modal modalClosed"}>
       <section className="modalContent">

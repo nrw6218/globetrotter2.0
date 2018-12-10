@@ -45,6 +45,11 @@ var TripList = function (_React$Component) {
         }
     }, {
         key: 'handleClick',
+
+
+        /*
+            Opens the modal and sets the trip accordingly
+        */
         value: function handleClick(trip) {
             // Enable the modal
             this.setState({
@@ -52,6 +57,11 @@ var TripList = function (_React$Component) {
                 focusTrip: trip
             });
         }
+
+        /*
+            Closes the modal
+        */
+
     }, {
         key: 'handleClose',
         value: function handleClose(e) {
@@ -314,6 +324,9 @@ var Modal = function Modal(_ref) {
         children = _ref.children;
 
 
+    /*
+      Returns a modal object, containing the passed in children
+    */
     return React.createElement(
         'div',
         { className: show ? "modal modalOpen" : "modal modalClosed" },
@@ -344,6 +357,11 @@ var TripForm = function (_React$Component2) {
         return _this3;
     }
 
+    /*
+        Opens the modal using state
+    */
+
+
     _createClass(TripForm, [{
         key: 'handleOpen',
         value: function handleOpen(e) {
@@ -351,6 +369,11 @@ var TripForm = function (_React$Component2) {
                 modalOpen: true
             });
         }
+
+        /*
+            Closes the modal
+        */
+
     }, {
         key: 'handleClose',
         value: function handleClose(e) {
@@ -358,6 +381,11 @@ var TripForm = function (_React$Component2) {
                 modalOpen: false
             });
         }
+
+        /*
+            Handles the creation of a trip object
+        */
+
     }, {
         key: 'handleTrip',
         value: function handleTrip(e) {
@@ -424,15 +452,25 @@ var TripForm = function (_React$Component2) {
 
     return TripForm;
 }(React.Component);
+/*
+    Find the errorMessage object and populate it with a message
+*/
+
 
 var handleError = function handleError(message) {
     $("#errorMessage").text(message);
 };
 
+/*
+    Redirect the user to the desired location
+*/
 var redirect = function redirect(response) {
     window.location = response.redirect;
 };
 
+/*
+    Sends an ajax request
+*/
 var sendAjax = function sendAjax(type, action, data, success) {
     $.ajax({
         cache: false,

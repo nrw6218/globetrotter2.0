@@ -1,682 +1,570 @@
 html, body {
-    width: 100%;
-    margin: 0;
-    margin-top: 26px;
-    padding: 0;
-    background: #efefef;
-}
+  width: 100%;
+  margin: 0;
+  margin-top: 26px;
+  padding: 0;
+  background: #efefef;
+  overflow: hidden; }
 
 .profile {
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-}
+  text-align: center;
+  font-family: 'Roboto', sans-serif; }
 
 .banner {
-    padding: 30px;
-    background: linear-gradient(#9a9a9a,#efefef);
-}
-
-.banner h1 {
+  padding: 30px;
+  background: linear-gradient(rgba(150, 206, 180, 0.5), #efefef); }
+  .banner h1 {
     font-size: 35px;
-    margin: 10px;
-}
+    margin: 10px; }
 
 .profilePic {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border: double 5px transparent;
-    border-radius: 110px;
-    background-image: linear-gradient(white, white), radial-gradient(circle at top left, rgba(255,111,105,1) 0%, rgba(219,173,255,1) 51%, rgba(150,206,180,1) 100%);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    font-weight: bold;
-}
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: double 5px transparent;
+  border-radius: 110px;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #ff6f69 0%, #dbadff 51%, #96ceb4 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  font-weight: bold; }
 
 .userStat {
-    display: inline-block;
-    margin: 10px;
-    color: #d96459;
-}
-
-.userStat h3 {
+  display: inline-block;
+  margin: 10px;
+  color: #d96459; }
+  .userStat h3 {
     font-weight: lighter;
-    margin: 0;
-}
+    margin: 0; }
 
 .information {
-    margin: 0 200px;
-    padding: 18px;
-    text-align: left;
-    border-top: solid 1px #cacaca;
-}
-
-.information img {
+  margin: 0 200px;
+  padding: 18px;
+  text-align: left;
+  border-top: solid 1px #cacaca; }
+  .information img {
     float: left;
     width: 70px;
     height: 70px;
     border-radius: 35px;
     margin: 18px;
-    margin-left: 0;
-}
+    margin-left: 0; }
 
 .activityName {
-    font-weight: bold;
-    display: inline-block;
-}
+  font-weight: bold;
+  display: inline-block; }
 
 .activityDate {
-    font-weight: lighter;
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 14px;
-}
+  font-weight: lighter;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 14px; }
 
 .activityDetails {
-    margin-top: 0;
-    margin-left: 88px;
-}
-
-.settings {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-}
+  margin-top: 0;
+  margin-left: 88px; }
 
 .errorContent {
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-}
-
-.errorContent h1 {
+  text-align: center;
+  font-family: 'Roboto', sans-serif; }
+  .errorContent h1 {
     font-family: 'Pacifico', cursive;
     font-size: 50px;
     font-weight: bold;
-    color: #d96459;
-}
-
-.errorContent img {
+    color: #d96459; }
+  .errorContent img {
     width: 100px;
     height: 100px;
-    display: inline-block;
-}
-
-.errorContent a {
+    display: inline-block; }
+  .errorContent a {
     display: block;
     text-decoration: none;
-    color: #52ad84;
-}
+    color: #52ad84; }
 
-.settings h1 {
+.settings {
+  font-family: 'Roboto', sans-serif;
+  text-align: center; }
+  .settings h1 {
     color: white;
-    background: linear-gradient(45deg, rgba(255,111,105,1) 0%, rgba(219,173,255,1) 51%, rgba(150,206,180,1) 100%);
+    background: linear-gradient(45deg, #ff6f69 0%, #dbadff 51%, #96ceb4 100%);
     padding: 8px;
-    display: inline-block;
-}
-  
-  .display-block {
-    display: block;
-  }
-  
-  .display-none {
-    display: none;
-  }
+    display: inline-block; }
+
+.display-block {
+  display: block; }
+
+.display-none {
+  display: none; }
 
 #map {
-    height: calc(100vh - 52px);
-}
-  
+  height: calc(100vh - 52px); }
+
 #app {
-    margin-top: 40px;
-}
+  margin-top: 40px; }
 
 #progressInput {
-    margin: 20px auto;
-    width: 30%;
-}
+  margin: 20px auto;
+  width: 30%; }
 
 .circle-background,
 .circle-progress {
-    fill: none;
-}
+  fill: none; }
 
 .circle-background {
-    stroke: #d96459;
-    opacity: 0.25;
-}
+  stroke: #d96459;
+  opacity: 0.25; }
 
 .circle-progress {
-    stroke: #ff6f69;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
+  stroke: #ff6f69;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
 
 .circle-text {
-    font-size: 2em;
-    font-weight: bold;
-    fill: #5a5a5a;
-    font-family: 'Roboto', sans-serif;
-}
+  font-size: 2em;
+  font-weight: bold;
+  fill: #5a5a5a;
+  font-family: 'Roboto', sans-serif; }
 
 #logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float:left;
-    border-radius: 8px;
-}
+  height: 40px;
+  width: 40;
+  padding-top: 5px;
+  float: left;
+  border-radius: 8px; }
 
 .logo {
-    background: linear-gradient(45deg, rgba(255,111,105,1) 0%, rgba(219,173,255,1) 51%, rgba(150,206,180,1) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 40px;
-    text-align: center;
-    font-family: 'Pacifico', cursive;
-    margin: 0;
-}
+  background: linear-gradient(45deg, #ff6f69 0%, #dbadff 51%, #96ceb4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 40px;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  margin: 0; }
 
 nav {
-    width: 100%;
-    background-color: white;
-    text-align: center;
-    border-bottom: solid 1px black;
-    position: fixed;
-    top: 0;
-    z-index: 10;
-}
-
-nav .logo {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  border-bottom: solid 1px black;
+  position: fixed;
+  top: 0;
+  z-index: 10; }
+  nav .logo {
     position: absolute;
     font-family: 'Pacifico', cursive;
     left: 10px;
     top: 3px;
     text-decoration: none;
-    font-size: 1.5em;
-}
-
-nav .icons {
+    font-size: 1.5em; }
+  nav .icons {
     position: absolute;
     right: 10px;
     top: 15px;
     display: flex;
-    flex-direction: row;
-}
-
-.icons a {
-    width: 1.5em;
-    height: 1.5em;
-    float: right;
-    margin-left: 10px;
-    transition: 0.2s all;
-}
-
-.icons a:hover {
-    opacity: 0.5;
-}
-
-.icons img {
-    width: 1.5em;
-    height: 1.5em;
-}
+    flex-direction: row; }
+    nav .icons a {
+      width: 1.5em;
+      height: 1.5em;
+      float: right;
+      margin-left: 10px;
+      transition: 0.2s all; }
+    nav .icons a:hover {
+      opacity: 0.5; }
+    nav .icons img {
+      width: 1.5em;
+      height: 1.5em; }
 
 nav:nth-child(1) {
-    padding-left: 25px;
-}
+  padding-left: 25px; }
 
 .navlink {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    margin-left: 20px;
-    margin-right: 20px;
-    color: black;
-    font-size: 1em;
-    display: inline-block;
-}
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: black;
+  font-size: 1em;
+  display: inline-block; }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    text-decoration: none;
-    padding: 0;
-    transition: border 0.4s ease;
-    text-transform: uppercase;
-    font-weight: lighter;
-}
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  padding: 0;
+  transition: border 0.4s ease;
+  text-transform: uppercase;
+  font-weight: lighter; }
 
 .navlink::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 1px;
-    background: #000;
-    transition: width .3s;
-}
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  background: #000;
+  transition: width .3s; }
 
 .navlink:hover::after {
-    width: 100%;
-}
+  width: 100%; }
 
 .tripForm {
-    text-align: center;
-    margin-top:0px;
-    padding-top:10px;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-.tripForm label {
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 10px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px; }
+  .tripForm label {
     display: inline-block;
     margin-left: 10px;
     font-size: 1.2em;
     color: black;
-    font-family: 'Roboto', sans-serif;
-}
-
-.tripForm .formSubmit {
-    width: 400px;
-}
+    font-family: 'Roboto', sans-serif; }
+  .tripForm .formSubmit {
+    width: 400px; }
 
 .mainForm {
-    width: 350px;
-    margin: 0 auto;
-    margin-top: 100px;
-    padding: 20px;
-    font-size: 1.2em;
-    background-color: white;
-    border: 1px solid #cecece;
-    text-align: center;
-}
-
-.mainForm .signUpPrint {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  font-size: 1.2em;
+  background-color: white;
+  border: 1px solid #cecece;
+  text-align: center; }
+  .mainForm .signUpPrint {
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
-    font-weight: lighter;
-}
-
-.mainForm p {
+    font-weight: lighter; }
+  .mainForm p {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: bold;
-    color: #343434;
-}
-
-.mainForm label {
+    color: #343434; }
+  .mainForm label {
     display: inline-block;
     width: 100px;
     margin-right: 10px;
     text-align: right;
-    font-size: 1.2em;
-}
+    font-size: 1.2em; }
 
 .formSubmit {
-    transition: background-color 0.4s ease;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 14px;
-    font-size: 0.75em;
-    height: 25px;
-    width: 250px;
-    background-color: #96ceb4;
-    border: solid 1px #cacaca;
-    border-radius: 3px;
-    padding: 3px 0px;
-    color: white;
-    text-decoration: none;
-}
+  transition: background-color 0.4s ease;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 14px;
+  font-size: 0.75em;
+  height: 25px;
+  width: 250px;
+  background-color: #96ceb4;
+  border: solid 1px #cacaca;
+  border-radius: 3px;
+  padding: 3px 0px;
+  color: white;
+  text-decoration: none; }
 
 .formSubmit:disabled {
-    opacity: 0.6;
-    cursor: default;
-}
+  opacity: 0.6;
+  cursor: default; }
 
 .formSubmit:disabled:hover {
-    opacity: 0.6;
-    background-color: #96ceb4;
-    cursor: default;
-}
+  opacity: 0.6;
+  background-color: #96ceb4;
+  cursor: default; }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
-}
+  color: white; }
 
 .formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #52ad84;
-    cursor: pointer;
-}
+  transition: background-color 0.4s ease;
+  background-color: #52ad84;
+  cursor: pointer; }
 
 .formInput {
-    text-align: center;
-    font-size: 0.75em;
-    width: 250px;
-    height: 30px;
-    display: block;
-    border-radius: 3px;
-    margin: 3px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    padding: 0.25em;
-    border: solid 1px #cacaca;
-    background-color: #fefefe;
-}
+  text-align: center;
+  font-size: 0.75em;
+  width: 250px;
+  height: 30px;
+  display: block;
+  border-radius: 3px;
+  margin: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding: 0.25em;
+  border: solid 1px #cacaca;
+  background-color: #fefefe; }
 
 .formInput:focus {
-    outline: none;
-    border: solid 1px #9a9a9a;
-    background-color: white;
-}
+  outline: none;
+  border: solid 1px #9a9a9a;
+  background-color: white; }
 
 .stackable {
-    display: inline-block;
-    margin: 0 50px;
-}
+  display: inline-block;
+  margin: 0 50px; }
 
 .settingsForm {
-    display: flex;
-    flex-direction: column;
-}
-
-.settingsForm input {
-    margin: 7px auto;
-}
+  display: flex;
+  flex-direction: column; }
+  .settingsForm input {
+    margin: 7px auto; }
 
 #tripMessage {
-    display:none;
-    top: 250px;
-    width: 250px;
-    height: 650px;
-    position: absolute;
-    z-index: 200;
-    right: 0px;
-    overflow: hidden;
-}
-
-#tripMessage h3 {
+  display: none;
+  top: 250px;
+  width: 250px;
+  height: 650px;
+  position: absolute;
+  z-index: 200;
+  right: 0px;
+  overflow: hidden; }
+  #tripMessage h3 {
     width: 200px;
     position: absolute;
     top: 0px;
-    left: 20px;
-}
+    left: 20px; }
 
 #speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
-}
+  height: 120px;
+  width: 250px;
+  z-index: 300; }
 
 .adImage {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-}
+  width: 200px;
+  height: 200px;
+  border-radius: 100px; }
 
 .advertisement {
-    text-align: center;
-}
+  text-align: center; }
 
 .learnMore {
-    text-decoration: none;
-    font-weight: bold;
-    color: rgba(219,173,255,1);
-}
+  text-decoration: none;
+  font-weight: bold;
+  color: #dbadff; }
 
 #errorMessage {
-    font-size: 0.8em;
-    font-family: 'Roboto', sans-serif;
-    display: block;
-    margin: 10px;
-    color: red;
-}
+  font-size: 0.8em;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  margin: 10px;
+  color: red; }
 
 #trip {
-    z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
-}
+  z-index: 225;
+  margin-top: -20px;
+  margin-left: 135px;
+  height: 450px;
+  width: 300px;
+  -ms-transform: rotate(330deg);
+  -webkit-transform: rotate(330deg);
+  transform: rotate(330deg); }
 
 #trips {
-    margin: 0 auto;
-    padding: 1.5%;
-    text-align: center;
-}
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  height: calc(100% - 30px);
+  overflow-y: auto; }
+
+#content {
+  height: calc(100% - 30px);
+  overflow-y: auto; }
 
 .tripList {
-    display: inline;
-    text-align: left;
-}
+  display: inline;
+  text-align: left; }
 
 .trip {
-    box-sizing: border-box;
-    margin: 0 auto;
-    margin: 0.5%;
-    padding: 10px;
-    border-radius: 4px;
-    max-width: 220px;
-    min-height: 60px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  margin: 0.5%;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 220px;
+  min-height: 60px;
+  overflow: hidden;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  vertical-align: top;
+  transition: background-color 0.5s ease; }
+  .trip .tripLocation {
+    line-height: 1em;
+    height: 1em;
     overflow: hidden;
-    display: inline-block;
-    font-family: 'Roboto', sans-serif;
-    vertical-align: top;
-    transition: background-color 0.5s ease;
-}
+    text-overflow: ellipsis; }
 
 .trip:hover {
-    background-color: #dedede;
-    cursor: pointer;
-}
+  background-color: #dedede;
+  cursor: pointer; }
 
 .modal {
-    position: fixed;
-    z-index: 200;
-    padding-top: 0%;
-    font-family: 'Roboto', sans-serif;
-    left:0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-    user-select: none;
-}
-
-.modal .formInput {
-    width: 400px;
-}
-
-.modal h1 {
+  position: fixed;
+  z-index: 200;
+  padding-top: 0%;
+  font-family: 'Roboto', sans-serif;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  user-select: none; }
+  .modal .formInput {
+    width: 400px; }
+  .modal h1 {
     font-family: 'Pacifico', cursive;
     text-align: center;
     font-weight: bold;
-    font-size: 30px;
-}
+    font-size: 30px; }
 
 .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 1.5em;
-    height: 1.5em;
-    transition: 0.5s all;
-}
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 1.5em;
+  height: 1.5em;
+  transition: 0.5s all; }
 
 .closeButton:hover {
-    cursor: pointer;
-    opacity: 0.6;
-}
-
-.modalContent{
-    position: relative;
-    text-align: left;
-    top: 50%;
-    border-radius: 4px;
-    transform: translateY(-50%);
-    margin: auto;
-    display: block;
-    width: 600px;
-    padding: 10px;
-    z-index: 201;
-    background-color: white;
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
-}
+  cursor: pointer;
+  opacity: 0.6; }
 
 .postButton {
-    position: fixed;
-    right: 10px;
-    margin-top: 10px;
-    background: white;
-    padding: 15px;
-    border-radius: 20px;
-    transition: 0.3s all;
-    box-shadow: 0px 0px 5px 0px #343434;
-}
+  position: fixed;
+  right: 25px;
+  margin-top: 10px;
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  transition: 0.3s all;
+  box-shadow: 0px 0px 5px 0px #343434; }
 
 .postButton:hover {
-    cursor: pointer;
-    background-color: #96ceb4;
-    opacity: 0.7;
-}
+  cursor: pointer;
+  background-color: #96ceb4;
+  opacity: 0.7; }
 
 .tripInfo {
-    display: flex;
-    flex-direction: row;
-    padding: 20px;
-}
-
-.tripInfo .content {
-    margin-left: 20px;
-}
+  display: flex;
+  flex-direction: row;
+  padding: 20px; }
+  .tripInfo .content {
+    margin-left: 20px; }
 
 .tripRing {
-    flex-shrink: 0;
-}
+  flex-shrink: 0; }
 
-.modalContent .tripTitle {
+.modalContent {
+  position: relative;
+  text-align: left;
+  top: 50%;
+  border-radius: 4px;
+  transform: translateY(-50%);
+  margin: auto;
+  display: block;
+  width: 600px;
+  padding: 10px;
+  z-index: 201;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1); }
+  .modalContent .tripTitle {
     font-size: 30px;
-    margin: 0;
-}
-
-.modalContent .tripLocation {
+    margin: 0; }
+  .modalContent .tripLocation {
     text-align: left;
-    margin-top: 0;
-}
-
-.modalContent .tripDetails {
+    margin-top: 0; }
+  .modalContent .tripDetails {
     font-weight: normal;
     margin: 0;
     padding: 0;
-    height: auto;
-}
+    height: auto; }
 
 #tripDetails {
-    height: 200px;
-    font-family: 'Roboto', sans-serif;
-    resize: none;
-}
+  height: 200px;
+  font-family: 'Roboto', sans-serif;
+  resize: none; }
 
 .modalOpen {
-    display: block;
-}
+  display: block; }
 
 .modalClosed {
-    display: none;
-}
+  display: none; }
 
 img.tripFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
+  margin-left: 25px;
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 4px;
+  margin-top: 10px;
+  float: left; }
 
 .delete {
-    float: left;
-    font-size: 9px;
-    margin: 0;
-    transition: 0.5s all;
-}
+  float: left;
+  font-size: 9px;
+  margin: 0;
+  transition: 0.5s all; }
 
 .delete:hover {
-    opacity: 0.6;
-    cursor: pointer;
-}
+  opacity: 0.6;
+  cursor: pointer; }
 
 h3.emptytrip {
-    width: 400px;
-    font-family: 'Pacifico', sans-serif;
-    font-size: 1.5em;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 18px;
-}
+  width: 400px;
+  font-family: 'Pacifico', sans-serif;
+  font-size: 1.5em;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 18px; }
 
 .firstTime {
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-}
+  text-align: center;
+  font-family: 'Roboto', sans-serif; }
 
 h3.tripTitle {
-    display: block;
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+  display: block;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 h3.tripLocation {
-    display: block;
-    text-align: left;
-    font-weight: normal;
-    font-size: 1em;
-    text-align: center;
-    color: #5a5a5a;
-}
+  display: block;
+  text-align: left;
+  font-weight: normal;
+  font-size: 1em;
+  text-align: center;
+  color: #5a5a5a; }
 
 p.tripDetails {
-    display: block;
-    text-align: left;
-    font-weight: normal;
-    padding-right: 40px;
-    font-size: 1em;
-    text-align: left;
-    line-height: 1.2em;
-    height: 6em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+  display: block;
+  text-align: left;
+  font-weight: normal;
+  padding-right: 40px;
+  font-size: 1em;
+  text-align: left;
+  line-height: 1.2em;
+  height: 6em;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-    text-transform: uppercase;
-}
-
-footer a {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase; }
+  footer a {
     float: left;
     margin: 20px;
     text-decoration: none;
     color: black;
-    font-size: 13px;
-}
-
-footer h3 {
+    font-size: 13px; }
+  footer h3 {
     float: right;
     margin: 20px;
     color: #9a9a9a;
-    font-size: 13px;
-}
+    font-size: 13px; }

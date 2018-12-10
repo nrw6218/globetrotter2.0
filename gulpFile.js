@@ -6,7 +6,7 @@ const eslint = require('gulp-eslint');
 const concat = require('gulp-concat');
 
 gulp.task('sass', () => {
-    gulp.src('./scss/main.scss')
+    gulp.src('./scss/style.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./hosted/'));
 });

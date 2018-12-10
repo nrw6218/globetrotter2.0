@@ -15,7 +15,7 @@ var countries = [];
 var initMap = function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
-        zoom: 10
+        zoom: 3
     });
 
     infoWindow = new google.maps.InfoWindow();

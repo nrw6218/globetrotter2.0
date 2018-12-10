@@ -31,6 +31,11 @@ const AccountSchema = new mongoose.Schema({
     unique: true,
     match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
   },
+  bio: {
+    type: String,
+    required: false,
+    trim: false,
+  },
   salt: {
     type: Buffer,
     required: true,
@@ -51,6 +56,7 @@ AccountSchema.statics.toAPI = doc => ({
   first: doc.first,
   last: doc.last,
   imageLink: doc.imageLink,
+  bio: doc.bio,
   _id: doc._id,
 });
 
@@ -93,7 +99,13 @@ AccountSchema.statics.updateAccountInfo = (accountInfo, callback) => {
   if (accountInfo.originalEmail === accountInfo.updatedEmail) {
     return AccountModel.findOneAndUpdate(
       search,
-      { first: accountInfo.first, last: accountInfo.last, imageLink: accountInfo.imageLink },
+      {
+        first: accountInfo.first,
+        last: accountInfo.last,
+        imageLink: accountInfo.imageLink,
+        bio: accountInfo.bio,
+      },
+      { returnNewDocument: true },
       callback
     );
   }
@@ -105,6 +117,7 @@ AccountSchema.statics.updateAccountInfo = (accountInfo, callback) => {
       imageLink: accountInfo.imageLink,
       email: accountInfo.updatedEmail,
     },
+      { returnNewDocument: true },
       callback
     );
 };

@@ -126,6 +126,11 @@ var ProfileView = function (_React$Component) {
                         this.props.user.last
                     ),
                     React.createElement(
+                        "p",
+                        { className: "profileBio" },
+                        this.props.user.bio
+                    ),
+                    React.createElement(
                         "div",
                         { className: "userStat" },
                         React.createElement(

@@ -10,8 +10,6 @@ const handleLogin = (e) => {
         handleError("Email or password is empty");
         return false;
     }
-
-    console.log($("input[name=_csrf]").val());
     
     sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 

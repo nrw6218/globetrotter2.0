@@ -47,7 +47,7 @@ var SettingsWindow = function (_React$Component) {
         value: function handleAccountUpdate(e) {
             e.preventDefault();
 
-            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#image").val() == '') {
+            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
                 handleError("You have not made any changes to your account.");
                 return false;
             }
@@ -59,7 +59,7 @@ var SettingsWindow = function (_React$Component) {
     }, {
         key: "checkAccountValues",
         value: function checkAccountValues(e) {
-            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#image").val() == '') {
+            if ($("#first").val() == '' && $("#last").val() == '' && $("#email").val() == '' && $("#bio").val() == '' && $("#image").val() == '') {
                 this.setState({ accountChange: true });
             } else {
                 this.setState({ accountChange: false });
@@ -113,6 +113,7 @@ var SettingsWindow = function (_React$Component) {
                         React.createElement("input", { className: "formInput", id: "last", name: "last", onChange: this.checkAccountValues, placeholder: this.state.user.last }),
                         React.createElement("input", { className: "formInput", id: "email", name: "email", onChange: this.checkAccountValues, placeholder: this.state.user.email }),
                         React.createElement("input", { className: "formInput", id: "image", name: "image", onChange: this.checkAccountValues, placeholder: this.state.user.imageLink ? this.state.user.imageLink : 'Link a profile picture from the web!' }),
+                        React.createElement("textarea", { className: "formInput", id: "bio", type: "text", name: "bio", onChange: this.checkAccountValues, placeholder: this.state.user.bio ? this.state.user.bio : "Write a bio..." }),
                         React.createElement("input", { type: "hidden", name: "_csrf", value: this.state.csrf }),
                         React.createElement("input", {
                             className: "formSubmit",

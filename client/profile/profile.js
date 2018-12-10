@@ -66,6 +66,8 @@ class ProfileView extends React.Component {
                     <img className="profilePic" src={this.props.user.imageLink && this.props.user.imageLink != "" ? this.props.user.imageLink : "assets/img/profilepic.svg"} alt="Profile Picture"/>
                     <h1>{this.props.user.first} {this.props.user.last}</h1>
                     
+                    <p className="profileBio">{this.props.user.bio}</p>
+
                     <div className="userStat">
                         <h3><b>{this.props.trips ? this.props.trips.length : '?'}</b> Total Trips</h3>
                     </div>

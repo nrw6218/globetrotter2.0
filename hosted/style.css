@@ -28,6 +28,11 @@ html, body {
   background-clip: content-box, border-box;
   font-weight: bold; }
 
+.profileBio {
+  margin: 16px 200px;
+  font-size: 14px;
+  color: #343434; }
+
 .userStat {
   display: inline-block;
   margin: 10px;
@@ -300,8 +305,13 @@ nav:nth-child(1) {
   background-color: white; }
 
 .stackable {
-  display: inline-block;
   margin: 0 50px; }
+  .stackable .formInput {
+    width: 400px; }
+  .stackable textarea {
+    height: 200px;
+    resize: none;
+    font-family: 'Roboto', sans-serif; }
 
 .settingsForm {
   display: flex;

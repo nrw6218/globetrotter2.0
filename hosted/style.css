@@ -340,7 +340,11 @@ nav:nth-child(1) {
 .learnMore {
   text-decoration: none;
   font-weight: bold;
-  color: #dbadff; }
+  color: #dbadff;
+  transition: all 0.5s; }
+
+.learnMore:hover {
+  opacity: 0.6; }
 
 #errorMessage {
   font-size: 0.8em;

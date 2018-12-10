@@ -117,7 +117,7 @@ var ProfileView = function (_React$Component) {
                 React.createElement(
                     "div",
                     { className: "banner" },
-                    React.createElement("img", { className: "profilePic", src: this.props.user.imageLink && this.props.user.imageLink != "" ? this.props.user.imageLink : "assets/img/profilepic.png", alt: "Profile Picture" }),
+                    React.createElement("img", { className: "profilePic", src: this.props.user.imageLink && this.props.user.imageLink != "" ? this.props.user.imageLink : "assets/img/profilepic.svg", alt: "Profile Picture" }),
                     React.createElement(
                         "h1",
                         null,

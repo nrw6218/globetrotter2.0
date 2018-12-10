@@ -422,6 +422,11 @@ nav:nth-child(1) {
     text-decoration: none;
     font-weight: bold;
     color: rgba(219,173,255,1);
+    transition: all 0.5s;
+}
+
+.learnMore:hover {
+    opacity: 0.6;
 }
 
 #errorMessage {

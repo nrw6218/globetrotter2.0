@@ -63,7 +63,7 @@ class ProfileView extends React.Component {
         return (
             <div className="profile">
                 <div className="banner">
-                    <img className="profilePic" src={this.props.user.imageLink && this.props.user.imageLink != "" ? this.props.user.imageLink : "assets/img/profilepic.png"} alt="Profile Picture"/>
+                    <img className="profilePic" src={this.props.user.imageLink && this.props.user.imageLink != "" ? this.props.user.imageLink : "assets/img/profilepic.svg"} alt="Profile Picture"/>
                     <h1>{this.props.user.first} {this.props.user.last}</h1>
                     
                     <div className="userStat">
